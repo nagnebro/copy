@@ -1,6 +1,8 @@
 from ursina import *
 
+from scene.findscene import FindScene
 from scene.renscene import RenScene
+from ui.inventory import Inventory
 
 
 class Node:
@@ -51,6 +53,7 @@ player_graphics.z = -0.5
 player_graphics.scale_x = 0.6
 player_graphics.rotation_x = -90
 
+inventory = Inventory(parent=camera.ui)
 
 def input(key):
     if key == 'd':
@@ -70,6 +73,12 @@ def input(key):
             evil=0,
             chaos=0,
             font="NanumSquareRoundR.ttf",
+            bar_mission_solved=False,
+        ))
+    elif key == 'q':
+        FindScene(inventory, Empty(
+            evil=0,
+            chaos=0,
             bar_mission_solved=False,
         ))
 
