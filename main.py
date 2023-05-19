@@ -65,6 +65,13 @@ def input(key):
         player_graphics.play_animation('idle_left')
     elif key == 'd up':
         player_graphics.play_animation('idle_right')
+    elif key == 'e':
+        RenScene(Empty(
+            evil=0,
+            chaos=0,
+            font="NanumSquareRoundR.ttf",
+            bar_mission_solved=False,
+        ))
 
 
 def update():
@@ -84,16 +91,6 @@ sun_sub = DirectionalLight(color=color.rgba(110, 110, 110, 255), shadows=False)
 sun_sub.look_at(Vec3(-0.5, 1, 1))
 
 Sky()
-
-RenScene(Empty(
-    evil=0,
-    chaos=0,
-    font="NanumSquareRoundR.ttf",
-    bar_mission_solved=False,
-))
-
-
-
 
 # item = Entity(parent=camera.ui, model='quad', texture='blueprint', scale=.3, z=2)
 

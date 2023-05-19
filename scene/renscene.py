@@ -16,5 +16,5 @@ class RenScene(Entity):
         background = Entity(parent=conversation, model='quad', texture='inha_ware6_hall',
                             scale=(camera.aspect_ratio, 1),
                             color=color.white, z=4, world_y=0)
-        npc = Entity(parent=conversation, model='quad', texture='chunsong',
+        npc = Entity(parent=conversation, model='quad', texture='chunsong', position=(0, .1),
                      scale=(camera.aspect_ratio / 3, camera.aspect_ratio / 3), z=3)

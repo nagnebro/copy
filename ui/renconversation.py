@@ -14,15 +14,15 @@ class RenConversation(Entity):
     def __init__(self, variables_object=None, **kwargs):
         super().__init__(parent=camera.ui, y=-.1)
 
-        self.question = Button(parent=self, text_origin=(0, .3), scale=(camera.aspect_ratio, .25), model="quad",
+        self.question = Button(parent=self, text_origin=(0, .25), scale=(camera.aspect_ratio, .3), model="quad",
                                origin=(0, 0),
-                               position=(0, -.4),
+                               position=(0, -.25),
                                text='Question')
         self.question.text_entity.font = "NanumSquareRoundR.ttf"
         self.question.text_entity.line_height = 1.25
         # self.question.text_entity.position = (-.45, -.05)
         self.question.highlight_color = self.question.color
-        self.more_indicator = Entity(parent=self.question, model=Circle(3), position=(.45, -.4, -.1), rotation_z=180,
+        self.more_indicator = Entity(parent=self.question, model=Circle(3), position=(.4, .2, -.1), rotation_z=180,
                                      color=color.azure, world_scale=.5, z=-1, enabled=False)
 
         def toggle():
@@ -39,11 +39,11 @@ class RenConversation(Entity):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-        self.answer_0 = Button(parent=self, text='answer_0', y=.25, scale=(1, .075),
+        self.answer_0 = Button(parent=self, text='answer_0', x=0, y=.4, scale=(1, .075),
                                text_origin=(-.5, 0), model=copy(self.button_model))
-        self.answer_1 = Button(parent=self, text='answer_1', y=self.answer_0.y - self.spacing, scale=(1, .075),
+        self.answer_1 = Button(parent=self, text='answer_1', x=self.answer_0.x, y=self.answer_0.y - self.spacing, scale=(1, .075),
                                text_origin=(-.5, 0), model=copy(self.button_model))
-        self.answer_2 = Button(parent=self, text='answer_2', y=self.answer_1.y - self.spacing, scale=(1, .075),
+        self.answer_2 = Button(parent=self, text='answer_2', x=self.answer_0.x, y=self.answer_1.y - self.spacing, scale=(1, .075),
                                text_origin=(-.5, 0), model=copy(self.button_model))
 
         self.buttons = (self.answer_0, self.answer_1, self.answer_2)
