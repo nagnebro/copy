@@ -1,7 +1,6 @@
 from ursina import *
 
 from scene.renscene import RenScene
-from ui.renconversation import RenConversation
 
 
 class Node:

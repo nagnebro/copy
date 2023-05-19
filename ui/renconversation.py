@@ -14,7 +14,7 @@ class RenConversation(Entity):
     def __init__(self, variables_object=None, **kwargs):
         super().__init__(parent=camera.ui, y=-.1)
 
-        self.question = Button(parent=camera.ui, text_origin=(0, .3), scale=(camera.aspect_ratio, .25), model="quad",
+        self.question = Button(parent=self, text_origin=(0, .3), scale=(camera.aspect_ratio, .25), model="quad",
                                origin=(0, 0),
                                position=(0, -.4),
                                text='Question')
