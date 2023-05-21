@@ -3,6 +3,7 @@ from ursina import *
 from scene.findscene import FindScene
 from scene.renscene import RenScene
 from ui.inventory import Inventory
+from scene.chapter1_test import Chapter1_test
 
 
 class Node:
@@ -13,7 +14,7 @@ class Node:
 
 
 app = Ursina()
-window.borderless = False
+window.borderless = False # screen을 이동시킬 수 있는 바를 생성할 것이냐는 함수
 
 # wp = WindowPanel(
 #     title='Custom Window',
@@ -77,6 +78,12 @@ def input(key):
         ))
     elif key == 'q':
         FindScene(inventory, Empty(
+            evil=0,
+            chaos=0,
+            bar_mission_solved=False,
+        ))
+    elif key == '1':
+        Chapter1_test(Empty(
             evil=0,
             chaos=0,
             bar_mission_solved=False,
