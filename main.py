@@ -14,7 +14,7 @@ editor_camera = EditorCamera(enabled=False, ignore_paused=True)
 inventory = Inventory(parent=camera.ui)
 
 
-def initMap():
+def init_map():
     # 기본 땅, 하늘
     ground = Entity(model='plane', collider='box', scale=64, texture='brick', texture_scale=(4, 4))
     ground.rotation_x = -90
@@ -52,5 +52,5 @@ def update():
     camera.rotation_x = -75
 
 
-initMap()
+init_map()
 app.run()
