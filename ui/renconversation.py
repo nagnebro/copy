@@ -10,9 +10,8 @@ class Node:
 
 
 class RenConversation(Entity):
-
     def __init__(self, variables_object=None, **kwargs):
-        super().__init__(parent=camera.ui, y=-.1)
+        super().__init__(y=-.1)
 
         self.question = Button(parent=self, text_origin=(0, .25), scale=(camera.aspect_ratio, .3), model="quad",
                                origin=(0, 0),
