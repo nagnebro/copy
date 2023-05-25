@@ -4,6 +4,10 @@ from scene.findscene import FindScene
 from scene.renscene import RenScene
 from ui.inventory import Inventory
 from scene.chapter1_test import Chapter1_test
+from scene.chapter2_test import Chapter2_test
+from scene.chapter3_test import Chapter3_test
+from scene.chapter4_test import Chapter4_test
+from scene.chapter5_test import Chapter5_test
 
 
 class Node:
@@ -88,6 +92,34 @@ def input(key):
             chaos=0,
             bar_mission_solved=False,
         ))
+
+    elif key == '2':
+        Chapter2_test(Empty(
+            evil=0,
+            chaos=0,
+            bar_mission_solved=False,
+        ))
+    elif key == '3':
+        Chapter3_test(Empty(
+            evil=0,
+            chaos=0,
+            bar_mission_solved=False,
+        ))
+
+    elif key == '4':
+        Chapter4_test(Empty(
+            evil=0,
+            chaos=0,
+            bar_mission_solved=False,
+        ))
+
+
+    elif key == '5':
+            Chapter5_test(Empty(
+                evil=0,
+                chaos=0,
+                bar_mission_solved=False,
+            ))
 
 
 def update():
