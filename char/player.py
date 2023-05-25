@@ -23,7 +23,15 @@ class Player(SpriteSheetAnimation):
             setattr(self, key, value)
 
     def input(self, key):
-        if key == 'd':
+        if key == 'w up':
+            self.play_animation('idle_right')
+        elif key == 's up':
+            self.play_animation('idle_right')
+        elif key == 'a up':
+            self.play_animation('idle_left')
+        elif key == 'd up':
+            self.play_animation('idle_right')
+        elif key == 'd':
             self.play_animation('walk_right')
         elif key == 'a':
             self.play_animation('walk_left')
@@ -31,12 +39,6 @@ class Player(SpriteSheetAnimation):
             self.play_animation('walk_up')
         elif key == 's':
             self.play_animation('walk_down')
-        elif key == 'w up' or 's up':
-            self.play_animation('idle_right')
-        elif key == 'a up':
-            self.play_animation('idle_left')
-        elif key == 'd up':
-            self.play_animation('idle_right')
 
     def update(self):
         self.y += held_keys['w'] * time.dt * 2
