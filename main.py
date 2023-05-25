@@ -2,7 +2,7 @@ from ursina import *
 
 from char.npc import Npc
 from char.player import Player
-from ui.inventory import Inventory
+from scene.boardscene import BoardScene
 
 app = Ursina()
 window.borderless = False  # window 상단 바 제거 여부
@@ -11,7 +11,8 @@ player = Player()
 
 editor_camera = EditorCamera(enabled=False, ignore_paused=True)
 
-inventory = Inventory(parent=camera.ui)
+board = BoardScene(parent=camera.ui)
+board.disable()
 
 
 def init_map():
@@ -50,6 +51,11 @@ def init_map():
 def update():
     camera.position = (player.x, player.y - 18, -6)
     camera.rotation_x = -75
+
+
+def input(key):
+    if key == 'q':
+        board.enable()
 
 
 init_map()
