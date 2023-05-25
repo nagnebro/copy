@@ -14,23 +14,26 @@ class Npc(SpriteSheetAnimation):
             'walk_left': ((0, 1), (4, 1)),
             'walk_right': ((0, 0), (4, 0)),
         })
+        self.conversationOped = None
         self.play_animation('idle_right')
-        self.x = 1
         self.z = -0.5
         self.scale_x = 0.6
         self.rotation_x = -90
 
-        self.inConversation = False
+        self.conversation = None
 
         for key, value in kwargs.items():
             setattr(self, key, value)
 
+    def input(self, key):
+        if key == 'e':
+            if not self.conversation or not self.conversation.enabled:
+                self.conversationOped = True
+            
     def update(self):
-        if self.intersects(self.target) and not self.inConversation:
-            RenScene(Empty(
-                evil=0,
-                chaos=0,
+        if self.intersects(self.target) and self.conversationOped:
+            self.conversation = RenScene(Empty(
+                script=self.script,
                 font="NanumSquareRoundR.ttf",
-                bar_mission_solved=False,
             ))
-            self.inConversation = True
+            self.conversationOped = False
