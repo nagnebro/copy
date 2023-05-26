@@ -5,7 +5,7 @@ from ui.component.renconversation import RenConversation
 
 class RenScene(Entity):
 
-    def __init__(self, variables_object=None):
+    def __init__(self, image, background, variables_object=None):
         super().__init__(parent=camera.ui)
 
         conversation = RenConversation(variables_object=variables_object, parent=self)
@@ -16,8 +16,8 @@ class RenScene(Entity):
             convo = dedent(data)
             conversation.start_conversation(convo)
 
-        background = Entity(parent=conversation, model='quad', texture='inha_ware6_hall',
+        background = Entity(parent=conversation, model='quad', texture=background,
                             scale=(camera.aspect_ratio, 1),
                             color=color.white, z=4, world_y=0)
-        npc = Entity(parent=conversation, model='quad', texture='chunsong', position=(0, .1),
+        npc = Entity(parent=conversation, model='quad', texture=image, position=(0, .1),
                      scale=(camera.aspect_ratio / 3, camera.aspect_ratio / 3), z=3)

@@ -16,8 +16,9 @@ class Npc(SpriteSheetAnimation):
         })
         self.play_animation('idle_right')
         self.z = -0.5
-        self.scale_x = 0.6
-        self.rotation_x = -90
+        self.scale_y = 1.5
+        self.scale_x = 0.9
+        self.rotation_x = -45
 
         self.conversation = None
 
@@ -28,10 +29,14 @@ class Npc(SpriteSheetAnimation):
 
     def input(self, key):
         if key == 'e' and self.cube.intersects(self.target):
-            self.conversation = RenScene(Empty(
-                script=self.script,
-                font="NanumSquareRoundR.ttf",
-            ))
-            
+            self.conversation = RenScene(
+                image=self.image,
+                background=self.background,
+                variables_object=Empty(
+                    script=self.script,
+                    font="NanumSquareRoundR.ttf",
+                )
+            )
+
     def update(self):
         self.intersects(self.target)
