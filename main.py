@@ -3,6 +3,7 @@ from ursina import *
 from game.char.npc import Npc
 from game.char.player import Player
 from game.map.map_inha import MapInha
+from ui.component.info import Info
 from ui.scene.boardscene import BoardScene
 
 app = Ursina()
@@ -12,6 +13,7 @@ player = Player()
 
 editor_camera = EditorCamera(enabled=False, ignore_paused=True)
 
+info = Info(parent=camera.ui)
 board = BoardScene(parent=camera.ui)
 board.disable()
 
