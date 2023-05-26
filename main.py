@@ -1,6 +1,5 @@
 from ursina import *
 
-from game.char.npc import Npc
 from game.char.player import Player
 from game.map.map_inha import MapInha
 from ui.component.info import Info
@@ -22,32 +21,50 @@ def init_map():
     # 기본 땅, 하늘
     inha_map = MapInha()
 
-    sun = DirectionalLight(parent=inha_map, color=color.rgba(255, 255, 220, 255), shadows=True)
-    sun.look_at(Vec3(0.5, 1, 1))
-    sun_sub = DirectionalLight(color=color.rgba(110, 110, 110, 255), shadows=False)
-    sun_sub.look_at(Vec3(-0.5, 1, 1))
-    Sky()
-
-    inha_map.place_npc(player)
+    # sun = DirectionalLight(parent=inha_map, color=color.rgba(255, 255, 220, 255), shadows=True)
+    # sun.look_at(Vec3(0.5, 1, 1))
+    # sun_sub = DirectionalLight(color=color.rgba(110, 110, 110, 255), shadows=False)
+    # sun_sub.look_at(Vec3(-0.5, 1, 1))
+    # Sky()
+    #
+    # inha_map.place_npc(player)
 
     return inha_map
 
-# def other_map():
-#     ground = Entity(model='plane', collider='box', scale=8, color=color.white)
-#     ground.rotation_x = -90
-#
-#     Sky(color=color.hex("2b1e15"))
+
+def other_map():
+    other = Entity()
+    # cube = Entity(parent=other, model='plane', texture='inha_ware6_hall', scale=(36, 0, 8), position=(0, 4, -2))
+    # cube.rotation_x = -180
+    ground = Entity(parent=other, model='plane', texture='brick', collider='box', scale=(36, 0, 8), texture_scale=(8,8), color=color.white)
+    ground.rotation_x = -90
+    Sky(color=color.black)
+    return other
 
 
 def update():
-    camera.position = (player.x, player.y - 18, -6)
-    camera.rotation_x = -75
+    camera.rotation_x = -45
+    camera.position = (camera.position.x, player.y - 18, -18)
+    if player.x < 12:
+        camera.position = (player.x, player.y - 18, -18)
 
 
 def input(key):
     if key == 'q':
         board.enable()
+    # if key == 'g':
+    #     if other.enabled:
+    #         other.disable()
+    #         main_map.enable()
+    #     else:
+    #         other.enable()
+    #         main_map.disable()
 
 
-init_map()
+# FindScene(parent=camera.ui)
+# main_map = init_map()
+
+other = other_map()
+# other.disable()
+
 app.run()

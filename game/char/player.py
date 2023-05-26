@@ -15,8 +15,9 @@ class Player(SpriteSheetAnimation):
         self.position = (1, 0)
         self.play_animation('idle_right')
         self.z = -0.5
-        self.scale_x = 0.6
-        self.rotation_x = -90
+        self.scale_y = 1.5
+        self.scale_x = 0.9
+        self.rotation_x = -45
 
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -42,5 +43,5 @@ class Player(SpriteSheetAnimation):
     def update(self):
         self.y += held_keys['w'] * time.dt * 2
         self.y -= held_keys['s'] * time.dt * 2
-        self.x += held_keys['d'] * time.dt * 1.2
-        self.x -= held_keys['a'] * time.dt * 1.2
+        self.x += held_keys['d'] * time.dt * 2
+        self.x -= held_keys['a'] * time.dt * 2
