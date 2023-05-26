@@ -5,8 +5,8 @@ from ui.component.renconversation import RenConversation
 
 class RenScene(Entity):
 
-    def __init__(self, image, background, variables_object=None):
-        super().__init__(parent=camera.ui)
+    def __init__(self, image, background, variables_object=None, **kwargs):
+        super().__init__(parent=camera.ui, **kwargs)
 
         conversation = RenConversation(variables_object=variables_object, parent=self)
         with open('_resources/script/' + variables_object.script, 'r', encoding='UTF8') as file:

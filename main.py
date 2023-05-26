@@ -2,7 +2,6 @@ from ursina import *
 
 from game.char.player import Player
 from game.map.map_chapter import MapChapter
-from game.map.map_inha import MapInha
 from ui.component.info import Info
 from ui.scene.boardscene import BoardScene
 

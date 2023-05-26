@@ -13,7 +13,7 @@ class Npc(SpriteSheetAnimation):
             'walk_up': ((0, 2), (4, 2)),
             'walk_left': ((0, 1), (4, 1)),
             'walk_right': ((0, 0), (4, 0)),
-        })
+        }, **kwargs)
         self.play_animation('idle_right')
         self.z = -0.5
         self.scale_y = 1.5
@@ -27,16 +27,20 @@ class Npc(SpriteSheetAnimation):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def input(self, key):
-        if key == 'e' and self.cube.intersects(self.target):
-            self.conversation = RenScene(
-                image=self.image,
-                background=self.background,
-                variables_object=Empty(
-                    script=self.script,
-                    font="NanumSquareRoundR.ttf",
-                )
-            )
+    def disable(self):
+        print("clear")
+        self.cube.disable()
+        super().disable()
 
-    def update(self):
-        self.intersects(self.target)
+    def input(self, key):
+        if key == 'e':
+            print(self.cube.enabled)
+            if self.cube.intersects(self.target):
+                self.conversation = RenScene(
+                    image=self.image,
+                    background=self.background,
+                    variables_object=Empty(
+                        script=self.script,
+                        font="NanumSquareRoundR.ttf",
+                    )
+                )

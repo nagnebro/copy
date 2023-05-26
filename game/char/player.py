@@ -13,8 +13,8 @@ class Player(SpriteSheetAnimation):
             'walk_right': ((0, 0), (4, 0)),
         })
         self.position = (1, 0)
+        self.origin = (0, 0, 1)
         self.play_animation('idle_right')
-        self.z = -0.5
         self.scale_y = 1.5
         self.scale_x = 0.9
         self.rotation_x = -45
@@ -41,7 +41,7 @@ class Player(SpriteSheetAnimation):
             self.play_animation('walk_down')
 
     def update(self):
-        self.y += held_keys['w'] * time.dt * 2
-        self.y -= held_keys['s'] * time.dt * 2
-        self.x += held_keys['d'] * time.dt * 2
-        self.x -= held_keys['a'] * time.dt * 2
+        self.y += held_keys['w'] * time.dt * 2.4
+        self.y -= held_keys['s'] * time.dt * 2.4
+        self.x += held_keys['d'] * time.dt * 2.4
+        self.x -= held_keys['a'] * time.dt * 2.4
