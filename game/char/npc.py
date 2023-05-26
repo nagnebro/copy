@@ -1,6 +1,6 @@
 from ursina import *
 
-from scene.renscene import RenScene
+from ui.scene.renscene import RenScene
 
 
 class Npc(SpriteSheetAnimation):

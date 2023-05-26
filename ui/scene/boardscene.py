@@ -8,11 +8,10 @@
 
     그대로 저장
 """
-from ursina import Empty, Entity, dedent, camera, color, Func, Draggable, Text, Vec3, Mesh, curve, destroy
+from ursina import Entity, camera, color, Draggable, Text, Mesh, destroy
 
-from ui.combine import Combine
-from ui.inventory import Inventory
-from ui.renconversation import RenConversation
+from ui.component.combine import Combine
+from ui.component.inventory import Inventory
 
 
 class BoardScene(Entity):

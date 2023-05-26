@@ -1,15 +1,15 @@
-from ursina import Empty, Entity, dedent, camera, color
+from ursina import Entity, dedent, camera, color
 
-from ui.renconversation import RenConversation
+from ui.component.renconversation import RenConversation
 
 
-class Chapter1_test(Entity):
+class Chapter5_test(Entity):
 
     def __init__(self, variables_object=None, **kwargs):
         super().__init__(**kwargs)
         conversation = RenConversation(variables_object=variables_object)
 
-        with open('_resources/script/chapter1/chapter1.txt', encoding='UTF8') as file:
+        with open('_resources/script/chapter5/chapter5.txt', encoding='UTF8') as file:
             data = file.read()
             convo = dedent(data)
             conversation.start_conversation(convo)

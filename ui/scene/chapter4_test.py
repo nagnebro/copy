@@ -1,6 +1,6 @@
-from ursina import Empty, Entity, dedent, camera, color
+from ursina import Entity, dedent, camera, color
 
-from ui.renconversation import RenConversation
+from ui.component.renconversation import RenConversation
 
 
 class Chapter4_test(Entity):

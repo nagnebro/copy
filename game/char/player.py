@@ -1,7 +1,5 @@
 from ursina import *
 
-from scene.renscene import RenScene
-
 
 class Player(SpriteSheetAnimation):
     def __init__(self, **kwargs):
@@ -14,6 +12,7 @@ class Player(SpriteSheetAnimation):
             'walk_left': ((0, 1), (4, 1)),
             'walk_right': ((0, 0), (4, 0)),
         })
+        self.position = (1, 0)
         self.play_animation('idle_right')
         self.z = -0.5
         self.scale_x = 0.6
