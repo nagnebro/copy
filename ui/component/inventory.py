@@ -85,6 +85,7 @@ class Inventory(Entity):
 if __name__ == '__main__':
     app = Ursina()
     inventory = Inventory()
+    window.borderless = False
 
 
     def add_item():

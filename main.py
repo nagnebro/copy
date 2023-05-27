@@ -4,6 +4,7 @@ from game.char.player import Player
 from game.map.map_inha import MapInha
 from ui.component.info import Info
 from ui.scene.boardscene import BoardScene
+from ui.scene.renscene import RenScene
 
 app = Ursina()
 window.borderless = False  # window 상단 바 제거 여부
@@ -64,7 +65,22 @@ def input(key):
 # FindScene(parent=camera.ui)
 # main_map = init_map()
 
+
+# RenScene test해보려고 추가한 코드.
+# variables = Empty(
+#     evil=0,
+#     chaos=0,
+#     bar_mission_solved=False,
+# )
+#
+#
+# RenScene(variables_object=variables)
+
+
 other = other_map()
+
+
+
 # other.disable()
 
 app.run()
