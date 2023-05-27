@@ -37,7 +37,8 @@ def other_map():
     other = Entity()
     # cube = Entity(parent=other, model='plane', texture='inha_ware6_hall', scale=(36, 0, 8), position=(0, 4, -2))
     # cube.rotation_x = -180
-    ground = Entity(parent=other, model='plane', texture='brick', collider='box', scale=(36, 0, 8), texture_scale=(8,8), color=color.white)
+    ground = Entity(parent=other, model='plane', texture='brick', collider='box', scale=(36, 0, 8),
+                    texture_scale=(8, 8), color=color.white)
     ground.rotation_x = -90
     Sky(color=color.black)
     return other
@@ -78,8 +79,6 @@ def input(key):
 
 
 other = other_map()
-
-
 
 # other.disable()
 

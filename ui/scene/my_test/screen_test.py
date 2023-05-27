@@ -7,22 +7,35 @@ from ursina import *
 # 우선 내가 수정한 대화 방식으로 만들어보기. -> 선택지 없는 대화창.
 from conversation_test import RenConversation
 
+
 app = Ursina()
 window.borderless = False;
+
+class MyButton(Button):
+    def __init__(self, entity, parent=None):
+        super().__init__(model='cube', color=color.red, scale=(1, 1, 1), parent=parent)
+        self.entity = entity
+
+    def on_click(self, **kwargs):
+        print("Entity clicked:", self.entity)
+
+
+
 
 background = Entity(parent=camera.ui, model="quad", texture="restroom.png",
                     scale=(camera.aspect_ratio, 1),
                     color=color.white, z=4, world_y=0)  # 배경 지정
 
-paper = Entity(parent=camera.ui, model="quad", texture="paper", color=color.white, z=4, world_y=0 ,scale = .2,
-                x = 0.1, y = 0.1,)
+paper = Entity(parent=camera.ui, model="quad", texture="paper", color=color.white, z=4, world_y=0, scale=.2,
+               x=0.1, y=0.1, )
 
-paper2 = Entity(parent=camera.ui, model="quad", texture="paper", color=color.white, z=4, world_y=0 ,scale = .2
-               )
+paper2 = Entity(parent=camera.ui, model="quad", texture="paper", color=color.white, z=4, world_y=0, scale=.2
+                )
 
+button = Button(parent=camera.ui, model="quad", texture='glass', color=color.white, z=4, world_y=0, scale=.2,
+                text='glass',
+                x=-0.4, y=-0.4, tooltip=Tooltip('this is btn.'))
 
-button = Button(parent=camera.ui, model="quad", texture = 'glass', color=color.white, z=4, world_y=0 ,scale = .2, text ='glass',
-                x = -0.4, y = -0.4, tooltip = Tooltip('this is btn.'))
 
 # Button
 
@@ -30,25 +43,40 @@ button = Button(parent=camera.ui, model="quad", texture = 'glass', color=color.w
 # tooltip = Tooltip('this is btn')
 # tooltip은 버튼이나 draggable과 같은 클래스에만 먹는다. 상속구조 확인해봐야 할듯
 
+isscreen = True
+
 def open_screen():
+    # 창을 생성한다.
 
-    screen = Draggable(
-     parent = camera.ui,
-    model = Quad(radius=.015),
-    texture = 'white_cube',
-    scale = (.7, .4),
-    z=4, world_y=0,
-    color = color.color(0, 0, .1, .9),
-        disabled = True,
-        text = 'it is common glass i can\'t type korean..'
+    if isscreen :
+        print(button.hovered)
+        Draggable(
+            parent=camera.ui,
+            model=Quad(radius=.015),
+            texture='white_cube',
+            scale=(.7, .4),
+            z=4, world_y=0,
+            color=color.color(0, 0, .1, .9),
+            disabled=True,
+            text='it is common glass i can\'t type korean..')
 
-    )
+
+
+        print('창이 띄워져있음')
+
+        return False # 창이 띄워져있으면 종료한다.
+
     # origin = (.5, .5), 얘는 왜 있는지 모르겠네, 얘도 아무튼 위치잡는 속성
+
+button.on_click = open_screen
+
+
+# if button.hovered_entity == None:
+#     print('hi')
 
 
 # mouse.hovered_entity in self.buttons -> bool type의 결과값을 반환.
 
-button.on_click =  open_screen
 
 # variables = Empty(
 #     evil=0,
@@ -73,5 +101,6 @@ button.on_click =  open_screen
 
 
 # 마우스 호버 조건에 해당하는 조건문.
+
 
 app.run()
