@@ -1,20 +1,21 @@
 from ursina import *
 
+from data.player_data import PlayerData
 from game.char.player import Player
 from game.map.map_chapter import MapChapter
 from ui.component.info import Info
 from ui.scene.boardscene import BoardScene
-from ui.scene.renscene import RenScene
+from ui.scene.mainmenu import MainMenu
 
 app = Ursina()
 window.borderless = False  # window 상단 바 제거 여부
 
-player = Player()
+player = Player(data=(PlayerData(name='이름')))
 
 editor_camera = EditorCamera(enabled=False, ignore_paused=True)
 
 info = Info(parent=camera.ui)
-board = BoardScene(parent=camera.ui)
+board = BoardScene(parent=camera.ui, player_data=player.data)
 board.disable()
 
 
@@ -41,6 +42,7 @@ def input(key):
         board.enable()
 
 
+MainMenu()
 init_map()
 # RenScene test해보려고 추가한 코드.
 # variables = Empty(
