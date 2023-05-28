@@ -102,11 +102,13 @@ m = Button()
 
 
 background = Entity(parent = camera.ui, model = 'quad', texture = 'restroom', colr = color.white ,scale=(camera.aspect_ratio,1))
-proviso1 = MyButton(parent = camera.ui , model = 'quad',texture = 'glass.png', color = color.white , scale = .2 ,x=.3, y=.3, text='text1')
+
+proviso1 = MyButton(parent = camera.ui , model = 'quad',texture = 'glass.png', color = color.white , scale = .2 ,x=.3, y=.3, text='ㅁㄴㄹㅁㄴㄹ')
 proviso2 = MyButton(parent = camera.ui , model = 'quad',texture = 'glass.png', color = color.white , scale = .2 ,x=.2, y=.3,text='text2.')
 proviso3 = MyButton(parent = camera.ui , model = 'quad',texture = 'glass.png', color = color.white , scale = .2 ,x=.0, y=.3,text='text3.')
 proviso4 = MyButton(parent = camera.ui , model = 'quad',texture = 'glass.png', color = color.white , scale = .2 ,x=-.1, y=.3,text='text4.')
 proviso5 = MyButton(parent = camera.ui , model = 'quad',texture = 'glass.png', color = color.white , scale = .2 ,x=-.2, y=-.2,text='text5.')
+
 
 test1= MyButton(parent = camera.ui , model = 'quad',texture = 'paper.png', color = color.white , scale = .2 ,x=-.4, y=-.4 , text= 'text2')
 test2 = MyButton(parent = camera.ui , model = 'quad',texture = 'potion.png', color = color.white , scale = .2 ,x=-.5, y=-.5, text = 'text2')
