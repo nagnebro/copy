@@ -51,10 +51,12 @@ class MyButton(Button):
             model=Quad(radius=.015),
             texture='white_cube',
             scale=(.7, .4),
-            z=-1, world_y=0, # ㅎ화면을 정면으로 바라봤을 떄 우리가 일반적으로 생각하는 수학의 좌표평면이 있다. 그리고 현재 내가 바라보는 위치에서 원점으로 갈수록
+            z=-1, world_y=0, # 화면을 정면으로 바라봤을 떄 우리가 일반적으로 생각하는 수학의 좌표평면이 있다. 그리고 현재 내가 바라보는 위치에서 원점으로 갈수록
                             # z축의 값은 +가 되고 나와 가까워질수록 -값이 된다. 즉 z의 속성값을 +로 설정할 시 객체들(texture)들 밑에 묻히기 때문에
                             # 보이지 않게 되는 것이다. 따라서 -로 설정하면 거의 절대적으로 보인다고 할 수 있겠다. (z-index)
+
             color=color.color(0, 0, .1, .9),
+
             disabled=True, # Draggable클래스 역시 button클래스를 상속받으므로 이 기능을 추가하지 않으면 창이 클릭이 되는 이상한 상황이 발생하므로 True로 버튼의 기능을 disable시켜준다.
                             # draggin -> drag 가능 유무를 결정하는 속성값
 
@@ -66,6 +68,7 @@ class MyButton(Button):
             btn = Button( # 여기서도 MyButton으로 생성할 시 그 버튼을 클릭할떄도 위에 draggable 객체가 생성됨.
                             # 따라서 button 타입으로 객체 생성, 위의 방법으로 할거면 on_click 함수의 if조건으로 단서수집 객체들을 클래스에 집어넣던지 해서
                             # Mybutton 이면서 단서인것만 클릭했을때 이벤트가 발생하게 해야한다.
+
                 parent = camera.ui,
                 model = 'quad',
                 scale = (.2,.2),

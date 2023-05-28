@@ -132,15 +132,6 @@ test = Draggable(arent = camera.ui , model = 'quad',texture = 'glass.png', color
 
 
 
-class Test2:
-    def one():
-        print('ho')
-        two()
-
-    def two():
-        print('g')
-        one()
-
 #on_click()
 app.run() # 앱,창이 켜진다.
 
