@@ -2,7 +2,7 @@ from ursina import *
 
 
 class Player(SpriteSheetAnimation):
-    def __init__(self, **kwargs):
+    def __init__(self, data, **kwargs):
         super().__init__('Tressa', tileset_size=(6, 5), fps=4, collider='box', animations={
             'idle_left': ((1, 4), (1, 4)),
             'idle_right': ((0, 4), (0, 4)),
@@ -12,6 +12,7 @@ class Player(SpriteSheetAnimation):
             'walk_left': ((0, 1), (4, 1)),
             'walk_right': ((0, 0), (4, 0)),
         })
+        self.data = data
         self.position = (1, 0)
         self.origin = (0, 0, 1)
         self.play_animation('idle_right')
@@ -25,6 +26,7 @@ class Player(SpriteSheetAnimation):
     def input(self, key):
         if key == 'w up':
             self.play_animation('idle_right')
+            self.data.name = 'wtf'
         elif key == 's up':
             self.play_animation('idle_right')
         elif key == 'a up':

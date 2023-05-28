@@ -16,9 +16,10 @@ from ui.component.inventory import Inventory
 
 class BoardScene(Entity):
 
-    def __init__(self, variables_object=None, **kwargs):
+    def __init__(self, player_data=None, variables_object=None, **kwargs):
         super().__init__(parent=camera.ui)
 
+        self.player_data = player_data
         self.inventory = None
         self.combine = None
         self.line=None
@@ -56,6 +57,7 @@ class BoardScene(Entity):
     def input(self, key):
         if key == 'z':
             if self.inventory:
+                print(self.player_data.name)
                 self.inventory.disable()
                 self.inventory = None
             else:
