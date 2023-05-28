@@ -5,26 +5,47 @@ double_check = True # 단서를 클릭 시 처음 한번만 창이 뜨게끔 한
 
 class MyButton(Button):
 
-    def __init__(self,list=None,**kwargs):
-        self.list = list
-        self.check = True
+    def __init__(self,**kwargs):
 
+
+        self.check = True
         super().__init__(**kwargs)
 
+
+    def close_screen(self):
+
+
+        # 전역변수를 함수내에서 사용할 때 global 제어자?를 붙여주지 않으면 컴파일 에러가 발생한다.
+        # 밖의 전역변수를 사용하는 것인지, 함수내에서 선언한 지역변수인지 헷갈려하기 때문이다.
+        # 기본적으로는 이름이 같은 전역변수와 지역변수가 있을 떄 당연하게도 지역변수의 우선순위가 더 높다.
+        # 유효범위가 좁을수록 그 범위안에서는 우선순위가 높다 생각하면 됨.
+
+        # 여기서 중요한 것은 단서를 중복해서 클릭했을 때는 창이 띄워져서는 안된다는 것.
+
+        global double_check
+        self.screen.disable()
+        double_check = True
+        # on_click이 발생했는데 doublc_check가 false라는 것은 창이 꺼졌을떄이므로 double_check를 true로 바꿔 다음번 클릭 떄 창이 열리게끔 한다.
 
 
     def on_click(self):# mybutton으로 만든 객체들이 클릭됐을때 실행되는 메서드. , Button클래스의 on_click 오버라이딩, 이벤트핸들러로 동작한다.
                             # list가 None이면 for문 돌릴때 에러발생할 거다. 근데 어차피 list는 우리가 추가해줄 거기 때문에 괜찮음.
 
-        global double_check  # 전역변수를 함수내에서 사용할 때 global 제어자?를 붙여주지 않으면 컴파일 에러가 발생한다.
+
+        global double_check
+                            # 전역변수를 함수내에서 사용할 때 global 제어자?를 붙여주지 않으면 컴파일 에러가 발생한다.
                             # 밖의 전역변수를 사용하는 것인지, 함수내에서 선언한 지역변수인지 헷갈려하기 때문이다.
                             # 기본적으로는 이름이 같은 전역변수와 지역변수가 있을 떄 당연하게도 지역변수의 우선순위가 더 높다.
                             # 유효범위가 좁을수록 그 범위안에서는 우선순위가 높다 생각하면 됨.
 
                             # 여기서 중요한 것은 단서를 중복해서 클릭했을 때는 창이 띄워져서는 안된다는 것.
+
+
+
         if double_check:
 
 
+            double_check = False
             self.screen = Draggable(
             parent=camera.ui,
             model=Quad(radius=.015),
@@ -39,6 +60,7 @@ class MyButton(Button):
 
             text=self.text) # Entity 객체에서는 text 속성이없음. button속성에 있기 때문에 draggable 클래스나 button클래스에서만 지정해야 text가 보인다.
                                 # 결론적으로 단서들을 button이나 draggable 타입으로 만들어야 할 이유가 명확한 것.
+
 
 
             btn = Button( # 여기서도 MyButton으로 생성할 시 그 버튼을 클릭할떄도 위에 draggable 객체가 생성됨.
@@ -57,12 +79,12 @@ class MyButton(Button):
 
 
             btn.position= (0,-0.2,-1)
-            btn.on_click=self.screen.disable  # 얘는 button클래스의 on_click을 뜻한다
-                                            # Button 클래스의 on_click 메서드는 action으로 정의돼있기 때문에 ()를 붙여주면 안된다.
-                                            # 또한 disable()과 같이 작성시에는 on_click됐을 떄 함수가 실행되는 것이 아닌 무조건 1번은 바로 실행되는 것.
+            btn.on_click=self.close_screen
 
             # 예외처리는 다음과 같이 한다.
             #  Mybutton 클래스는 화면에서 단서들로만 정해져있기 때문에 단서들이라는 특정성과 단 1개만 실행됐을 때 더이상 실행되지 않게끔 해야함
 
-        else: # on_click이 발생했는데 doublc_check가 false라는 것은 창이 꺼졌을떄이므로 double_check를 true로 바꿔 다음번 클릭 떄 창이 열리게끔 한다.
-            double_check = True
+
+
+
+
