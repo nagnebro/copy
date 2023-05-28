@@ -28,7 +28,6 @@ class Npc(SpriteSheetAnimation):
             setattr(self, key, value)
 
     def disable(self):
-        print("clear")
         self.cube.disable()
         super().disable()
 

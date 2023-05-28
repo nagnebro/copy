@@ -18,12 +18,12 @@ class Game(Entity):
         self.ui = None
         self.chapter = None
 
-    def start_chapter(self, num=0):
+    def start_chapter(self, num=1):
         print(self.menu)
         self.menu.disable()
         # print(self.menu)
         # self.menu.disable()
-        self.ui = Info()
+        self.ui = Info(num)
         self.chapter = MapChapter(self.player, num)
 
     def open_board(self):
