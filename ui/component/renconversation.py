@@ -10,7 +10,7 @@ class Node:
 
 
 class RenConversation(Entity):
-    def __init__(self, variables_object=None, **kwargs):
+    def __init__(self, font, variables_object=None, **kwargs):
         super().__init__(y=-.1)
 
         self.question = Button(parent=self, text_origin=(0, .25), scale=(camera.aspect_ratio, .3), model="quad",
@@ -120,7 +120,7 @@ class RenConversation(Entity):
                             setattr(self.variables_object, var, new_value)
 
                         print('executed code:', node.code)
-                        print(self.variables_object.evil)
+                        print(self.variables_object.sample_data)
                     except Exception as e:
                         print('failed executing code on node:', node, 'code:', node.code, 'error:', e)
 

@@ -21,13 +21,6 @@ class Npc(SpriteSheetAnimation):
         self.rotation_x = -45
 
         self.conversation = None
-
-        self.obj = Empty(
-            script=self.script,
-            evil=0,
-            font="NanumSquareRoundR.ttf",
-        )
-
         self.cube = Entity(parent=self, model='cube', collider='box', color=color.clear)
 
         for key, value in kwargs.items():
@@ -41,9 +34,11 @@ class Npc(SpriteSheetAnimation):
         if key == 'e':
             print(self.cube.enabled)
             if self.cube.intersects(self.target):
-                print(self.obj.evil)
+                print(self.target.data.sample_data)
                 self.conversation = RenScene(
                     image=self.image,
                     background=self.background,
-                    variables_object=self.obj
+                    script=self.script,
+                    font="NanumSquareRoundR.ttf",
+                    variables_object=self.target.data
                 )
