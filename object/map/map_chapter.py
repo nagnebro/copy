@@ -23,7 +23,7 @@ class MapChapter(Entity):
 
         # 챕터 별 배치
         if chapter == 1:
-            self.npc = Npc(parent=self, name='학생회장', image='crimer1', background='inha_ware6_hall',
+            self.npc = Npc(parent=self, name='학생회장', image='stu_pr_0', background='inha_ware6_hall',
                            script='chapter1/chapter1.txt',
                            target=self.player, position=(1, 4))
             self.portal.set_next_chapter(2)
@@ -31,7 +31,7 @@ class MapChapter(Entity):
                         color=color.orange)
 
         elif chapter == 2:
-            self.npc = Npc(parent=self, name='졸업생', image='crimer1', background='inha_ware6_hall',
+            self.npc = Npc(parent=self, name='졸업생', image='gradu_0', background='inha_ware6_hall',
                            script='chapter2/chapter2.txt',
                            target=self.player, position=(1, 1))
             self.portal.set_next_chapter(3)
@@ -39,7 +39,7 @@ class MapChapter(Entity):
                         collider='box', color=color.azure)
 
         elif chapter == 3:
-            self.npc = Npc(parent=self, name='동아리 선배', image='crimer1', background='inha_ware6_hall',
+            self.npc = Npc(parent=self, name='동아리 선배', image='club_leader_0', background='inha_ware6_hall',
                            script='chapter3/chapter3.txt',
                            target=self.player, position=(1, 4))
             self.npc.play_animation('idle_left')
@@ -48,7 +48,7 @@ class MapChapter(Entity):
             # collider='box', color=color.black)
 
         elif chapter == 4:
-            self.npc = Npc(parent=self, name='남교수', image='crimer1', background='inha_ware6_hall',
+            self.npc = Npc(parent=self, name='남교수', image='prof_nam_0', background='inha_ware6_hall',
                            script='chapter4/chapter4.txt',
                            target=self.player, position=(1, 4))
             self.npc.play_animation('idle_left')
@@ -56,7 +56,7 @@ class MapChapter(Entity):
             # b4 = Entity(parent=inha_map, name='주차장', model='cube', scale=4, position=(6, 4, -2), collider='box',
             #             color=color.white)
         elif chapter == 5:
-            self.npc = Npc(parent=self, name='전 애인', image='crimer1', background='inha_ware6_hall',
+            self.npc = Npc(parent=self, name='전 애인', image='ex_gf_0', background='inha_ware6_hall',
                            script='chapter5/chapter5.txt',
                            target=self.player, position=(1, 4))
             self.npc.play_animation('idle_right')
