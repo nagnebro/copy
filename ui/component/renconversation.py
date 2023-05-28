@@ -61,8 +61,6 @@ class RenConversation(Entity):
         self.buttons = (self.answer_0, self.answer_1, self.answer_2, self.answer_3, self.answer_4)
         # 추가된 버튼 2개를 buttons 리스트에 추가 , 나머지 부분은 for문으로 알아서 초기화돼서 건든것 없음. 튜플 형태로 저장
 
-
-
         for b in self.buttons:
             b.text_entity.font = "NanumSquareRoundR.ttf"
             b.text_entity.line_height = 1.15
@@ -71,16 +69,6 @@ class RenConversation(Entity):
         self.question_appear_sequence = None
         self.button_appear_sequence = None
         self.started = False
-
-
-
-        answer = self.list[0]
-
-        print(answer)
-        if answer != '학생회장':
-            self.gameOver()
-            return
-        self.success()
 
     def ask(self, node, question_part=0): # 여기서 node값은 conversation_nodes[0] 부터 시작한다.
         # print(node)

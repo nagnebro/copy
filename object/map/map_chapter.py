@@ -10,6 +10,7 @@ class MapChapter(Entity):
     def __init__(self, player, chapter, **kwargs):
         super().__init__(**kwargs)
 
+        self.proviso = Entity()
         self.portal = Portal(parent=self, position=(12, 0, 0))
         self.player = Player(player)
         self.passed = False
@@ -82,11 +83,13 @@ class MapChapter(Entity):
             self.passed = True
             self.npc.disable()
             self.player.disable()
+            self.proviso.disable()
             self.disable()
 
             self.player.data.chapter = self.portal.next_index
             print(self.player.data.chapter)
             MapChapter(player=self.player.data, chapter=self.portal.next_index)
+
         if self.proviso.intersects(self.player) and not self.pro_passed:
             self.pro_passed = True
             Proviso()
