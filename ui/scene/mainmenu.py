@@ -1,9 +1,9 @@
-from ursina import Entity, camera, color, Draggable, Text, Mesh, destroy, Button
+from ursina import Entity, camera, color, Draggable, Text, Mesh, destroy, Button, Func
 
 
 class MainMenu(Entity):
 
-    def __init__(self, player_data=None, variables_object=None, **kwargs):
+    def __init__(self, game):
         super().__init__(parent=camera.ui)
 
         background = Entity(parent=self, model='quad', texture='inha_ware6_entry',
@@ -37,7 +37,9 @@ class MainMenu(Entity):
             b.text_entity.font = "NanumSquareRoundB.ttf"
             b.text_entity.line_height = 1.15
 
-        btn_new_game.on_click = self.start_new_game
+        btn_new_game.on_click = Func(game.start_chapter, 1)
+        btn_continue.on_click = Func(game.start_chapter, game.player.chapter)
+        btn_exit.on_click = exit
 
     def start_new_game(self):
         self.disable()
