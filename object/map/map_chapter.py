@@ -19,6 +19,9 @@ class MapChapter(Entity):
         ground = Entity(parent=self, model='plane', texture='brick', scale=(36, 0, 8),
                         texture_scale=(8, 8), color=color.white)
         ground.rotation_x = -90
+        wall = Entity(parent=self, model='plane', texture='hall', scale=(36, 0, 8),
+                      position=(0, 5, -.2), texture_scale=(1, 1), color=color.white)
+        wall.rotation_x = -180
         player.position = (0, 0, 0)
 
         # 챕터 별 배치
@@ -79,4 +82,6 @@ class MapChapter(Entity):
             self.player.disable()
             self.disable()
 
+            self.player.data.chapter = self.portal.next_index
+            print(self.player.data.chapter)
             MapChapter(player=self.player.data, chapter=self.portal.next_index)
