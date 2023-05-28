@@ -14,15 +14,17 @@ from ui.component.combine import Combine
 from ui.component.inventory import Inventory
 
 
-class BoardScene(Entity):
+class BoardMenu(Entity):
 
-    def __init__(self, player_data=None, variables_object=None, **kwargs):
+    def __init__(self, player_data=None, resume=None):
         super().__init__(parent=camera.ui)
 
         self.player_data = player_data
         self.inventory = None
         self.combine = None
         self.line=None
+
+        self.resume = resume
 
         background = Entity(parent=self, model='quad', texture='board',
                             scale=(camera.aspect_ratio, 1),
@@ -53,6 +55,10 @@ class BoardScene(Entity):
 
         guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="'Z' 가방\t'X' 닫기\t'C' 조합",
                          position = (-.2, -.45, -1))
+
+    def disable(self):
+        self.resume()
+        super().disable()
 
     def input(self, key):
         if key == 'z':
