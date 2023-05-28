@@ -3,6 +3,7 @@ from ursina import *
 from object.char.npc import Npc
 from object.char.player import Player
 from object.portal import Portal
+from object.proviso import Proviso
 
 
 class MapChapter(Entity):
@@ -12,6 +13,7 @@ class MapChapter(Entity):
         self.portal = Portal(parent=self, position=(12, 0, 0))
         self.player = Player(player)
         self.passed = False
+        self.pro_passed = False
 
         # 맵 초기화
         EditorCamera(enabled=False, ignore_paused=True)
@@ -30,8 +32,8 @@ class MapChapter(Entity):
                            script='chapter1/chapter1.txt',
                            target=self.player, position=(1, 4))
             self.portal.set_next_chapter(2)
-            b1 = Entity(parent=self, name='화장실', model='cube', scale=2, position=(-3, 1, -1), collider='box',
-                        color=color.orange)
+            self.proviso = Entity(parent=self, name='화장실', model='cube', scale=2, position=(-3, 1, -1),
+                                  collider='box', color=color.orange)
 
         elif chapter == 2:
             self.npc = Npc(parent=self, name='졸업생', image='gradu_0', background='inha_ware6_hall',
@@ -85,3 +87,6 @@ class MapChapter(Entity):
             self.player.data.chapter = self.portal.next_index
             print(self.player.data.chapter)
             MapChapter(player=self.player.data, chapter=self.portal.next_index)
+        if self.proviso.intersects(self.player) and not self.pro_passed:
+            self.pro_passed = True
+            Proviso()

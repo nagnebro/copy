@@ -1,7 +1,7 @@
 
 from ursina import *
 
-from ui.scene.my_test.MyButton import MyButton
+from ui.scene.my_test.mybutton import MyButton
 
 '''
 
