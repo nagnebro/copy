@@ -10,7 +10,7 @@ class RenScene(Entity):
         super().__init__(parent=camera.ui)
 
         conversation = RenConversation(variables_object=variables_object, parent=self)
-        with open('_resources/script/' + variables_object.script, 'r', encoding='UTF8') as file:
+        with open('/_resources/script/' + variables_object.script, 'r', encoding='UTF8') as file:
             # open(파일 경로, r/w, 인코딩)
 
             data = file.read()

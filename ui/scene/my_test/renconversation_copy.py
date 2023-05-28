@@ -119,7 +119,6 @@ class RenConversation(Entity):
         if not node.children:
             self.buttons[0].text = '*떠난다*'
             self.buttons[0].on_click = Func(setattr, self, 'enabled', False)
-
             self.button_appear_sequence.append(Func(setattr, self.buttons[0], 'enabled', True))
 
 
