@@ -118,7 +118,9 @@ class RenConversation(Entity):
                             if operator == '/=':    new_value = original_value / value
 
                             setattr(self.variables_object, var, new_value)
+
                         print('executed code:', node.code)
+                        print(self.variables_object.evil)
                     except Exception as e:
                         print('failed executing code on node:', node, 'code:', node.code, 'error:', e)
 
