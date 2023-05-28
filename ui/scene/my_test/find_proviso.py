@@ -97,6 +97,10 @@ background = Entity()
 # camera.aspect_ratio 는 camera, 즉 창에 꽉차게끔 객체를 집어넣는다.
 # texture는 객체에 대신 삽입할 이미지 따위를 설정할 수 있다.
 
+m = Button()
+
+
+
 background = Entity(parent = camera.ui, model = 'quad', texture = 'restroom', colr = color.white ,scale=(camera.aspect_ratio,1))
 proviso1 = MyButton(parent = camera.ui , model = 'quad',texture = 'glass.png', color = color.white , scale = .2 ,x=.3, y=.3, text='text1')
 proviso2 = MyButton(parent = camera.ui , model = 'quad',texture = 'glass.png', color = color.white , scale = .2 ,x=.2, y=.3,text='text2.')
@@ -126,5 +130,18 @@ def input(key):
 
 test = Draggable(arent = camera.ui , model = 'quad',texture = 'glass.png', color = color.white , scale = .2 ,x=-.2, y=-.2,text='text5.')
 
+
+
+class Test2:
+    def one():
+        print('ho')
+        two()
+
+    def two():
+        print('g')
+        one()
+
 #on_click()
 app.run() # 앱,창이 켜진다.
+
+
