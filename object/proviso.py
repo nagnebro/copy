@@ -1,5 +1,5 @@
 from ursina import *
-from ui.scene.my_test.mybutton import MyButton
+from prec.my_test.mybutton import MyButton
 
 
 class Proviso(Entity):

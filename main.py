@@ -9,7 +9,7 @@ app = Ursina()
 window.borderless = False
 
 # 사용자
-player = PlayerData(name='이름', chapter=1)
+player = PlayerData(name='이름', chapter=2)
 
 # RenScene test 코드
 # menu = RenScene(variables_object=variables)
