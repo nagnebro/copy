@@ -13,6 +13,9 @@ window.borderless = False
 # 타이틀 화면
 menu = MainMenu
 
+# video = 'zelda_trailer.mp4'
+# video_player = Entity(model='quad', parent=camera.ui, scale=(1.5, 1), texture=video)
+
 # 게임 초기화
 game = Game('김이조', menu)
 
