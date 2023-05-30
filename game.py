@@ -12,7 +12,8 @@ class Game(Entity):
 
     def __init__(self, player_name, menu=MainMenu):
         super().__init__()
-        self.player = None
+        self.player_data = None
+
 
         self.load_player_data(player_name)
         self.menu = menu(game=self)
@@ -23,14 +24,14 @@ class Game(Entity):
     def load_player_data(self, player_name):
         try:
             with open(player_name + '.pickle', 'rb') as file:
-                self.player = pickle.load(file)
+                self.player_data = pickle.load(file)
         except FileNotFoundError:
             return None
 
-    def save_player_data(self, player):
-        with open(player.name + '.pickle', 'wb') as file:
-            pickle.dump(player, file)
-        self.load_player_data(player.name)
+    def save_player_data(self, player_data):
+        with open(player_data.name + '.pickle', 'wb') as file:
+            pickle.dump(player_data, file)
+        self.load_player_data(player_data.name)
 
     def start_chapter(self, num=1):
         print(self.menu)
@@ -38,18 +39,20 @@ class Game(Entity):
         # print(self.menu)
         # self.menu.disable()
         self.ui = Info(num)
-        self.chapter = MapChapter(self.player, num)
+        self.chapter = MapChapter(self.player_data, num)
+
 
     def open_board(self):
         self.ui.disable()
-        self.menu = BoardMenu(self.player, self.ui.enable)
+        print(type(self.player_data))
+        self.menu = BoardMenu(self.player_data, self.ui.enable)
 
     def open_escape(self):
         self.ui.disable()
         self.menu = EscapeMenu(self.ui.enable, self.save_exit)
 
     def save_exit(self):
-        self.save_player_data(player=self.player)
+        self.save_player_data(player_data=self.player_data)
         print('save and exit')
         exit()
 

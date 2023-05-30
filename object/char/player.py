@@ -3,7 +3,7 @@ from ursina import *
 
 class Player(SpriteSheetAnimation):
     def __init__(self, data, **kwargs):
-        super().__init__('Tressa', tileset_size=(6, 5), fps=4, collider='box', animations={
+        super().__init__('Tressa', tileset_size=(6, 5), fps=8, collider='box', animations={
             'idle_left': ((1, 4), (1, 4)),
             'idle_right': ((0, 4), (0, 4)),
 
@@ -43,7 +43,7 @@ class Player(SpriteSheetAnimation):
             self.play_animation('walk_down')
 
     def update(self):
-        self.y += held_keys['w'] * time.dt * 2.4
-        self.y -= held_keys['s'] * time.dt * 2.4
-        self.x += held_keys['d'] * time.dt * 2.4
-        self.x -= held_keys['a'] * time.dt * 2.4
+        self.y += held_keys['w'] * time.dt * 8
+        self.y -= held_keys['s'] * time.dt * 8
+        self.x += held_keys['d'] * time.dt * 8
+        self.x -= held_keys['a'] * time.dt * 8

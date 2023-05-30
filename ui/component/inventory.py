@@ -1,5 +1,7 @@
 from ursina import *
 
+from prec.my_test.mybutton import MyButton
+
 
 class Inventory(Entity):
     def __init__(self, player_data, **kwargs):
@@ -12,10 +14,13 @@ class Inventory(Entity):
             origin=(-.5, .5),
             position=(-.8, .4),
             color=color.color(0, 0, .1, .9),
+
+
         )
 
-        for item in player_data.inventory:
+        for item in player_data.inventory: # Mybutton 객체가 들어있는 inventory list
             self.append(item)
+
 
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -45,7 +50,7 @@ class Inventory(Entity):
         icon = Draggable(
             parent=self,
             model='quad',
-            texture=item,
+            texture=item.texture,
             color=color.white,
             scale_x=1 / self.texture_scale[0],
             scale_y=1 / self.texture_scale[1],
@@ -55,7 +60,9 @@ class Inventory(Entity):
             z=-.5,
         )
 
-        icon.tooltip = Tooltip(item)
+
+
+        icon.tooltip = Tooltip(item.text)
         icon.tooltip.background.color = color.color(0, 0, 0, .8)
 
         def drag():

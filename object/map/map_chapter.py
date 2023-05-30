@@ -7,14 +7,15 @@ from object.proviso import Proviso
 
 
 class MapChapter(Entity):
-    def __init__(self, player, chapter, **kwargs):
+    def __init__(self, player_data, chapter, **kwargs):
         super().__init__(**kwargs)
-
+        self.player_data = player_data
         self.proviso = Entity()
         self.portal = Portal(parent=self, position=(12, 0, 0))
-        self.player = Player(player)
+        self.player = Player(player_data)  # 여기서 player 객체를 생성, mapchapter는 새게임이나 계속하기 선택시 실행되는 파일임. game.py 파일에서 계속 data를 저장하고 있는 상태.
         self.passed = False
         self.pro_passed = False
+
 
         # 맵 초기화
         EditorCamera(enabled=False, ignore_paused=True)
@@ -25,7 +26,8 @@ class MapChapter(Entity):
         wall = Entity(parent=self, model='plane', texture='hall', scale=(36, 0, 8),
                       position=(0, 5, -.2), texture_scale=(1, 1), color=color.white)
         wall.rotation_x = -180
-        player.position = (0, 0, 0)
+        self.player.position = (0, 0, 0)
+
 
         # 챕터 별 배치
         if chapter == 1:
@@ -41,7 +43,7 @@ class MapChapter(Entity):
                            script='chapter2/chapter2.txt',
                            target=self.player, position=(1, 1))
             self.portal.set_next_chapter(3)
-            b2 = Entity(parent=self, name='복도', model='cube', scale=(2, 4, 1), position=(3, 1, -0.5),
+            self.proviso = Entity(parent=self, name='복도', model='cube', scale=(2, 4, 1), position=(3, 1, -0.5),
                         collider='box', color=color.azure)
 
         elif chapter == 3:
@@ -73,13 +75,28 @@ class MapChapter(Entity):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
+
+
+    def check(self):
+        input()
+        return True
+
+    def input(self,key=None):
+        if key == "x":
+            print(key)
+            return True
+
+
     def update(self):
         camera.rotation_x = -45
         camera.position = (camera.position.x, self.player.y - 18, -18)
         if self.player.x < 12:
             camera.position = (self.player.x, self.player.y - 18, -18)
 
-        if self.portal.intersects(self.player) and not self.passed:
+
+        # print(self.portal.intersects(self.player),self.passed)
+        if  self.portal.intersects(self.player) and not self.passed:
+
             self.passed = True
             self.npc.disable()
             self.player.disable()
@@ -87,9 +104,14 @@ class MapChapter(Entity):
             self.disable()
 
             self.player.data.chapter = self.portal.next_index
-            print(self.player.data.chapter)
-            MapChapter(player=self.player.data, chapter=self.portal.next_index)
+            # print(self.player.data.chapter)
+            MapChapter(player_data=self.player.data, chapter=self.portal.next_index)
 
-        if self.proviso.intersects(self.player) and not self.pro_passed:
+
+
+    def input(self,key): # 단서수집 포탈 근처에 갔을 떄 키를 눌러야 동작하게끔(Npc와 말거는 거처럼)
+
+        if self.proviso.intersects(self.player) and key == 'e':
+
             self.pro_passed = True
-            Proviso()
+            Proviso(self.player_data)
