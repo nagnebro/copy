@@ -1,4 +1,6 @@
-from ursina import Entity, camera, color, Draggable, Text, Mesh, destroy, Button, Func
+from ursina import Entity, camera, color, Draggable, Text, Mesh, destroy, Button, Func, Sequence
+
+from data.player_data import PlayerData
 
 
 class MainMenu(Entity):
@@ -37,7 +39,11 @@ class MainMenu(Entity):
             b.text_entity.font = "NanumSquareRoundB.ttf"
             b.text_entity.line_height = 1.15
 
-        btn_new_game.on_click = Func(game.start_chapter, 1)
+        new_game_sequence = Sequence()
+        new_game_sequence.append(Func(game.save_player_data, PlayerData(name='김이조', chapter=1)))
+        new_game_sequence.append(Func(game.start_chapter, 1))
+
+        btn_new_game.on_click = new_game_sequence
         btn_continue.on_click = Func(game.start_chapter, game.player.chapter)
         btn_exit.on_click = exit
 

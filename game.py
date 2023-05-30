@@ -1,4 +1,5 @@
 from ursina import Entity
+import pickle
 
 from object.map.map_chapter import MapChapter
 from ui.scene.boardmenu import BoardMenu
@@ -9,14 +10,27 @@ from ui.component.info import Info
 
 class Game(Entity):
 
-    def __init__(self, player=None, menu=MainMenu):
+    def __init__(self, player_name, menu=MainMenu):
         super().__init__()
-        self.player = player
+        self.player = None
+
+        self.load_player_data(player_name)
         self.menu = menu(game=self)
-        print(self.menu)
 
         self.ui = None
         self.chapter = None
+
+    def load_player_data(self, player_name):
+        try:
+            with open(player_name + '.pickle', 'rb') as file:
+                self.player = pickle.load(file)
+        except FileNotFoundError:
+            return None
+
+    def save_player_data(self, player):
+        with open(player.name + '.pickle', 'wb') as file:
+            pickle.dump(player, file)
+        self.load_player_data(player.name)
 
     def start_chapter(self, num=1):
         print(self.menu)
@@ -35,9 +49,10 @@ class Game(Entity):
         self.menu = EscapeMenu(self.ui.enable, self.save_exit)
 
     def save_exit(self):
-        # TODO: 저장 후 종료 기능 구현 필요
+        self.save_player_data(player=self.player)
         print('save and exit')
-        self.ui.enable()
+        exit()
+
 
     def input(self, key):
         if key == 'q':
