@@ -1,5 +1,6 @@
 from ursina import *
 
+from ui.scene.renscene import RenScene
 from object.char.npc import Npc
 from object.char.player import Player
 from object.portal import Portal
@@ -27,8 +28,14 @@ class MapChapter(Entity):
         wall.rotation_x = -180
         player.position = (0, 0, 0)
 
-        # 챕터 별 배치
         if chapter == 1:
+            RenScene(
+                image='',
+                background='',
+                script='prologue.txt',
+                font="NanumSquareRoundR.ttf"
+            )
+
             self.npc = Npc(parent=self, name='학생회장', image='stu_pr_0', background='inha_ware6_hall',
                            script='chapter1/chapter1.txt',
                            target=self.player, position=(1, 4))

@@ -26,7 +26,6 @@ class Player(SpriteSheetAnimation):
     def input(self, key):
         if key == 'w up':
             self.play_animation('idle_right')
-            self.data.name = 'wtf'
         elif key == 's up':
             self.play_animation('idle_right')
         elif key == 'a up':
