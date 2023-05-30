@@ -30,7 +30,6 @@ class MapChapter(Entity):
 
         if chapter == 1:
             RenScene(
-                image='',
                 background='',
                 script='prologue.txt',
                 font="NanumSquareRoundR.ttf"

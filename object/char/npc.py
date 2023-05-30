@@ -36,7 +36,6 @@ class Npc(SpriteSheetAnimation):
             if self.cube.intersects(self.target):
                 print(self.target.data.sample_data)
                 self.conversation = RenScene(
-                    image=self.image,
                     background=self.background,
                     script=self.script,
                     font="NanumSquareRoundR.ttf",
