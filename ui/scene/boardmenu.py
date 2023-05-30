@@ -8,7 +8,7 @@
 
     그대로 저장
 """
-from ursina import Entity, camera, color, Draggable, Text, Mesh, destroy
+from ursina import Entity, camera, color, Draggable, Text, Mesh, destroy, Func
 
 from ui.component.combine import Combine
 from ui.component.inventory import Inventory
@@ -22,7 +22,7 @@ class BoardMenu(Entity):
         self.player_data = player_data
         self.inventory = None
         self.combine = None
-        self.line=None
+        self.line = None
 
         self.resume = resume
 
@@ -30,31 +30,22 @@ class BoardMenu(Entity):
                             scale=(camera.aspect_ratio, 1),
                             color=color.white, z=4, world_y=0)
 
-        item1 = Draggable(parent=self, model='quad', texture='paper', name='paper', color=color.white,
-                          scale=(.1, .1), z=-1)
-        item2 = Draggable(parent=self, model='quad', texture='glass', name='glass', color=color.white,
-                          scale=(.1, .1), position=(-.2, .1, 0), z=-1)
-
-        def drop():
-            destroy(self.line)
-            if self.combine and (self.combine.x - item1.x) / self.combine.scale_x < 1:
-                self.combine.append(item1.name, 0)
-                item1.disable()
-            if self.combine and (self.combine.x - item2.x) / self.combine.scale_x < 1:
-                self.combine.append(item2.name, 1)
-                item2.disable()
-            if item1.enabled and item2.enabled:
-                points = [item1.position, item2.position]
-                self.line = Entity(parent=self, model=Mesh(points, mode='line', thickness=2), z=1, color=color.red)
-
-        item1.drop = drop
-        item2.drop = drop
-
-        points = [item1.position, item2.position]
-        self.line = Entity(parent=self, model=Mesh(points, mode='line', thickness=2), z=1, color=color.red)
+        # points = [item1.position, item2.position]
+        # self.line = Entity(parent=self, model=Mesh(points, mode='line', thickness=2), z=1, color=color.red)
 
         guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="'Z' 가방\t'X' 닫기\t'C' 조합",
-                         position = (-.2, -.45, -1))
+                     position=(-.2, -.45, -1))
+
+    def drop(self, item):
+        destroy(self.line)
+        if self.combine and (self.combine.x - item.x) / self.combine.scale_x < 1:
+            self.combine.append(item.name)
+            item.disable()
+
+    def append(self, item):
+        icon = Draggable(parent=self, model='quad', texture=item, name=item, color=color.white,
+                         scale=(.1, .1), z=-1)
+        icon.drop = Func(self.drop, icon)
 
     def disable(self):
         self.resume()
@@ -67,7 +58,7 @@ class BoardMenu(Entity):
                 self.inventory.disable()
                 self.inventory = None
             else:
-                self.inventory = Inventory(parent=self)
+                self.inventory = Inventory(parent=self, player_data=self.player_data)
         if key == 'x':
             self.disable()
             if self.combine:

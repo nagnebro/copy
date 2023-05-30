@@ -2,7 +2,7 @@ from ursina import *
 
 
 class Inventory(Entity):
-    def __init__(self, **kwargs):
+    def __init__(self, player_data, **kwargs):
         super().__init__(
             parent=camera.ui,
             model=Quad(radius=.015),
@@ -13,6 +13,9 @@ class Inventory(Entity):
             position=(-.8, .4),
             color=color.color(0, 0, .1, .9),
         )
+
+        for item in player_data.inventory:
+            self.append(item)
 
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -67,6 +70,7 @@ class Inventory(Entity):
             # if outside, return to original position
             if icon.x < 0 or icon.x >= 1 or icon.y > 0 or icon.y <= -1:
                 icon.position = (icon.org_pos)
+                self.parent.append(item)
                 return
 
             # if the spot is taken, swap positions

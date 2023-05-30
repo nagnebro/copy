@@ -14,56 +14,73 @@ from ursina import *
 
 
 class Combine(Entity):
-    items = []
-    def __init__(self, variables_object=None, **kwargs):
+
+    def __init__(self, **kwargs):
         super().__init__(
-            parent = camera.ui,
-            model = Quad(radius=.015),
-            texture = 'white_cube',
-            scale = (.5, .8),
-            origin = (.5, .5),
-            position = (.8,.4, -1),
-            color = color.color(0,0,.1,.9),
-            )
+            parent=camera.ui,
+            model=Quad(radius=.015),
+            texture='white_cube',
+            scale=(.5, .8),
+            origin=(.5, .5),
+            position=(.8, .4, -1),
+            color=color.color(0, 0, .1, .9),
+        )
+
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+        self.items = []
 
         item0 = Entity(parent=self, model='quad', color=color.rgba(255, 255, 255, 100), origin=(0, .5),
-                          scale=(.2, .125), x=-.8, y=-.2, z=-1)
+                       scale=(.2, .125), x=-.8, y=-.2, z=-1)
         item1 = Entity(parent=self, model='quad', color=color.rgba(255, 255, 255, 100), origin=(0, .5),
-                          scale=(.2, .125), x=-.5, y=-.2, z=-1)
+                       scale=(.2, .125), x=-.5, y=-.2, z=-1)
         item2 = Entity(parent=self, model='quad', color=color.rgba(255, 255, 255, 100), origin=(0, .5),
-                          scale=(.2, .125), x=-.2, y=-.2, z=-1)
+                       scale=(.2, .125), x=-.2, y=-.2, z=-1)
 
         result = Entity(parent=self, model='quad', color=color.rgba(255, 255, 255, 100), origin=(0, .5),
-                          scale=(.2, .125), x=-.5, y=-.6, z=-1)
+                        scale=(.2, .125), x=-.5, y=-.6, z=-1)
 
         guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="'V' 길게 눌러서 조합",
-                         origin=(1.2, .5), position = (0,-.9, -1), scale=(2, 1.25))
+                     origin=(1.2, .5), position=(0, -.9, -1), scale=(2, 1.25))
 
-    def append(self, item, x_index):
-        print('add item:', item)
+    def append(self, item_name):
+        print('add item:', item_name)
 
-        icon = Draggable(
+        item = Draggable(
             parent=self,
             model='quad',
-            texture=item,
+            texture=item_name,
+            name=item_name,
             color=color.white,
             scale_x=.2,
             scale_y=.125,
             origin=(0, .5),
-            x=-.8 + (x_index * 0.3),
+            x=-.8 + (len(self.items) * 0.3),
             y=-.2,
             z=-.5,
         )
-        self.items.append(icon)
+        self.items.append(item)
+        item.drop = Func(self.drop, item)
+
+    def drop(self, item):
+        if item.x < 0 or item.x >= 1 or item.y > 0 or item.y <= -1:
+            self.parent.append(item.name)
+            if item in self.items:
+                self.items.remove(item)
+            item.disable()
+            return
 
     def input(self, key):
         if key == 'v':
             for item in self.items:
                 item.disable()
-            Draggable(
+            self.items.clear()
+            result_item = Draggable(
                 parent=self,
                 model='quad',
                 texture='blueprint',
+                name='blueprint',
                 color=color.white,
                 scale_x=.2,
                 scale_y=.125,
@@ -72,3 +89,4 @@ class Combine(Entity):
                 y=-.6,
                 z=-.5,
             )
+            result_item.drop = Func(self.drop, result_item)
