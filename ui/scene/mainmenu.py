@@ -44,7 +44,7 @@ class MainMenu(Entity):
         new_game_sequence.append(Func(game.start_chapter, 1))
 
         btn_new_game.on_click = new_game_sequence
-        btn_continue.on_click = Func(game.start_chapter, game.player.chapter)
+        btn_continue.on_click = Func(game.start_chapter, game.player_data.chapter)
         btn_exit.on_click = exit
 
     def start_new_game(self):

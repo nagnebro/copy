@@ -51,6 +51,7 @@ class BoardMenu(Entity):
         self.resume()
         super().disable()
 
+
     def input(self, key):
         if key == 'z':
             if self.inventory:
