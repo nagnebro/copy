@@ -18,7 +18,6 @@ class Player(SpriteSheetAnimation):
         self.play_animation('idle_right')
         self.scale_y = 1.5
         self.scale_x = 0.9
-        self.rotation_x = -45
 
         for key, value in kwargs.items():
             setattr(self, key, value)

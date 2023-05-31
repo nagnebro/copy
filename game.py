@@ -2,6 +2,7 @@ from ursina import Entity, Audio
 import pickle
 
 from object.map.map_chapter import MapChapter
+from object.map.map_sprite import MapSprite
 from ui.scene.boardmenu import BoardMenu
 from ui.scene.escapemenu import EscapeMenu
 from ui.scene.mainmenu import MainMenu
@@ -39,8 +40,8 @@ class Game(Entity):
         # print(self.menu)
         # self.menu.disable()
         self.ui = Info(num)
-        self.chapter = MapChapter(self.player_data, num)
-
+        # self.chapter = MapChapter(self.player_data, num)
+        self.chapter = MapSprite(self.player_data, num)
 
     def open_board(self):
         self.ui.disable()
