@@ -6,3 +6,5 @@ __pycache__/
 ursina-master/
 
 *.DS_Store
+
+*.pickle

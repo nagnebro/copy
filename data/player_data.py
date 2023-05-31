@@ -1,6 +1,3 @@
-from ursina import *
-
-
 
 
 class PlayerData:
@@ -8,6 +5,6 @@ class PlayerData:
         self.name = name
 
         self.inventory = []
+        self.records = set()
         self.chapter = chapter
         self.sample_data = 0
-

@@ -40,8 +40,8 @@ class Game(Entity):
         # print(self.menu)
         # self.menu.disable()
         self.ui = Info(num)
-        # self.chapter = MapChapter(self.player_data, num)
-        self.chapter = MapSprite(self.player_data, num)
+        self.chapter = MapChapter(self.player_data, num)
+        # self.chapter = MapSprite(self.player_data, num)
 
     def open_board(self):
         self.ui.disable()

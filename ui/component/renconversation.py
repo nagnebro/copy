@@ -89,7 +89,11 @@ class RenConversation(Entity):
         self.question_appear_sequence = self.question.text_entity.appear(delay=.1)
 
         if node.code:
-            self.npc.texture = node.code
+            if '#' in node.code:
+                self.variables_object.records.add(node.code.strip('#'))
+                print(self.variables_object.records)
+            else:
+                self.npc.texture = node.code
 
         for b in self.buttons:
             b.enabled = False
