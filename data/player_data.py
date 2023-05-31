@@ -5,6 +5,6 @@ class PlayerData:
         self.name = name
 
         self.inventory = []
-        self.records = set()
+        self.record_titles = set()
         self.chapter = chapter
         self.sample_data = 0

@@ -9,9 +9,9 @@ class Proviso(Entity):
 
 
 
-    def __init__(self, player_data, **kwargs):
+    def __init__(self, player_data, item_data, **kwargs):
         super().__init__(parent=camera.ui, **kwargs)
-
+        self.item_data = item_data
 
 
         MyButton.player_data = player_data # Mybutton의 클래스 변수로 mapchapter에서 넘겨받은 player의 data를 넘겨준다.
@@ -51,11 +51,14 @@ class Proviso(Entity):
 
         # proviso = 1의 속성은 각 용의자에 해당하는 단서의 아이디값으로 조합시에 이용하면 됨.
         if player_data.chapter == 1:
-            background = Entity(parent=self, model='quad', texture='restroom', colr=color.white,
+            background = Entity(parent=self, model='quad', texture='restroom', color=color.white,
                                 scale=(camera.aspect_ratio, 1))
-            proviso1_1 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2,
-                                  x=.3,
-                                  y=.3, text='abcdefg', proviso=1)
+
+            # 활용 부탁드립니다
+            item1_1 = item_data.item["떨어진 영수증"]
+            proviso1_1 = MyButton(parent=self, model='quad', texture=item1_1.texture, color=color.white, scale=.2,
+                                  x=.3, y=.3, text=item1_1.name, proviso=item1_1.chapter_no)
+
             proviso1_2 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2,
                                   x=.2,
                                   y=.3, text='text2.', proviso=1)

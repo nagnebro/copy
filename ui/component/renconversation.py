@@ -90,8 +90,8 @@ class RenConversation(Entity):
 
         if node.code:
             if '#' in node.code:
-                self.variables_object.records.add(node.code.strip('#'))
-                print(self.variables_object.records)
+                self.variables_object.record_titles.add(node.code.strip('#'))
+                print(self.variables_object.record_titles)
             else:
                 self.npc.texture = node.code
 

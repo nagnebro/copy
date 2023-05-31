@@ -8,9 +8,10 @@ from object.proviso import Proviso
 
 
 class MapChapter(Entity):
-    def __init__(self, player_data, chapter, **kwargs):
+    def __init__(self, player_data, item_data, chapter, **kwargs):
         super().__init__(**kwargs)
         self.player_data = player_data
+        self.item_data = item_data
         self.proviso = Entity()
         self.portal = Portal(parent=self, position=(12, 0, 0))
         self.player = Player(player_data)  # 여기서 player 객체를 생성, mapchapter는 새게임이나 계속하기 선택시 실행되는 파일임. game.py 파일에서 계속 data를 저장하고 있는 상태.
@@ -19,16 +20,13 @@ class MapChapter(Entity):
 
 
         # 맵 초기화
-        EditorCamera(enabled=False, ignore_paused=True)
-        Sky(color=color.black)
-        ground = Entity(parent=self, model='plane', texture='brick', scale=(36, 0, 8),
-                        texture_scale=(8, 8), color=color.white)
-        ground.rotation_x = -90
-        wall = Entity(parent=self, model='plane', texture='hall', scale=(36, 0, 8),
-                      position=(0, 5, -.2), texture_scale=(1, 1), color=color.white)
-        wall.rotation_x = -180
-        self.player.position = (0, 0, 0)
+        camera.orthographic = True
+        camera.position = (0, 0)
+        camera.fov = 12
+        Sky(color=color.hex('4A4C50'))
 
+        wall = Sprite(parent=self, model='quad', texture='test_hall', texture_scale=(1, 1))
+        wall.scale *= 2
 
         if chapter == 1:
             RenScene(
@@ -94,11 +92,7 @@ class MapChapter(Entity):
 
 
     def update(self):
-        camera.rotation_x = -45
-        camera.position = (camera.position.x, self.player.y - 18, -18)
-        if self.player.x < 12:
-            camera.position = (self.player.x, self.player.y - 18, -18)
-
+        camera.position = (self.player.x, self.player.y)
 
         # print(self.portal.intersects(self.player),self.passed)
         if  self.portal.intersects(self.player) and not self.passed:
@@ -111,7 +105,7 @@ class MapChapter(Entity):
 
             self.player.data.chapter = self.portal.next_index
             # print(self.player.data.chapter)
-            MapChapter(player_data=self.player.data, chapter=self.portal.next_index)
+            MapChapter(player_data=self.player.data, item_data=self.item_data, chapter=self.portal.next_index)
 
 
 
@@ -120,4 +114,4 @@ class MapChapter(Entity):
         if self.proviso.intersects(self.player) and key == 'e':
 
             self.pro_passed = True
-            Proviso(self.player_data)
+            Proviso(self.player_data, self.item_data)

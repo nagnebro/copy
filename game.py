@@ -1,8 +1,9 @@
 from ursina import Entity, Audio
 import pickle
 
+from data.item_data import GameItemData
 from object.map.map_chapter import MapChapter
-from object.map.map_sprite import MapSprite
+from ui.component.note import Note
 from ui.scene.boardmenu import BoardMenu
 from ui.scene.escapemenu import EscapeMenu
 from ui.scene.mainmenu import MainMenu
@@ -14,7 +15,7 @@ class Game(Entity):
     def __init__(self, player_name, menu=MainMenu):
         super().__init__()
         self.player_data = None
-
+        self.item_data = GameItemData()
 
         self.load_player_data(player_name)
         self.menu = menu(game=self)
@@ -40,13 +41,15 @@ class Game(Entity):
         # print(self.menu)
         # self.menu.disable()
         self.ui = Info(num)
-        self.chapter = MapChapter(self.player_data, num)
-        # self.chapter = MapSprite(self.player_data, num)
+        self.chapter = MapChapter(self.player_data, self.item_data, num)
 
     def open_board(self):
         self.ui.disable()
-        print(type(self.player_data))
         self.menu = BoardMenu(self.player_data, self.ui.enable)
+
+    def open_note(self):
+        self.ui.disable()
+        self.menu = Note(self.player_data, self.ui.enable)
 
     def open_escape(self):
         self.ui.disable()
@@ -60,6 +63,8 @@ class Game(Entity):
     def input(self, key):
         if key == 'q':
             self.open_board()
+        elif key == 't':
+            self.open_note()
         elif key == 'escape':
             self.open_escape()
         elif key == 'space':
