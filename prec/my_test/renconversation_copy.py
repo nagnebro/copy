@@ -1,18 +1,23 @@
 from ursina import *
 from copy import copy
+
+
 # from ui.scene.my_test.chapter6_test import result
 
 class Node:
     __slots__ = ['index', 'indent_level', 'content', 'code', 'children', 'is_answer']
+
     # 인스턴스 변수를 제한한다. 위의 변수들만 node클래스의 인스턴스변수로 생성할 수 있다.
 
     def __str__(self):
         return 'Node:\n    ' + '\n    '.join([f'{e} = {getattr(self, e)}' for e in Node.__slots__])
     # node를 출력할 때 나옴. 객체의 toString이라 생각하면됨
 
+
 class RenConversation(Entity):
-    def __init__(self, variables_object=None, **kwargs):
+    def __init__(self, font=None, variables_object=None, **kwargs):
         super().__init__(y=-.1)
+        self.image = None
 
         self.question = Button(parent=self, text_origin=(0, .25), scale=(camera.aspect_ratio, .3), model="quad",
                                origin=(0, 0),
@@ -22,19 +27,19 @@ class RenConversation(Entity):
         self.question.text_entity.line_height = 1.25
         # self.question.text_entity.position = (-.45, -.05)
         self.question.highlight_color = self.question.color
+
+        self.npc = Entity(parent=self, model='quad', texture='', position=(0, .1),
+                          scale=(camera.aspect_ratio / 3, camera.aspect_ratio / 3), z=3)
+
         self.more_indicator = Entity(parent=self.question, model=Circle(3), position=(.4, .2, -.1), rotation_z=180,
-                                     color=color.azure, world_scale=.0, z=-1, disabled = True)
-         # 우측 하단에 뜨는 토글 스위치 껐음 너무 크게나와서. world_scale 0.5 -> 0으로 변경
+                                     color=color.azure, world_scale=.0, z=-1, disabled=True)
+        # 우측 하단에 뜨는 토글 스위치 껐음 너무 크게나와서. world_scale 0.5 -> 0으로 변경
 
-        self.list = [] # 객체(node)의 text나 content를 저장할 리스트
-
-
+        self.list = []  # 객체(node)의 text나 content를 저장할 리스트
 
         def toggle():
             self.more_indicator.visible = not self.more_indicator.visible
             invoke(self.more_indicator.toggle, delay=.5)
-
-
 
         self.more_indicator.toggle = toggle
         self.more_indicator.toggle()
@@ -48,20 +53,22 @@ class RenConversation(Entity):
 
         self.answer_0 = Button(parent=self, text='answer_0', x=0, y=.4, scale=(1, .075),
                                text_origin=(-.5, 0), model=copy(self.button_model))
-        self.answer_1 = Button(parent=self, text='answer_1', x=self.answer_0.x, y=self.answer_0.y - self.spacing, scale=(1, .075),
+        self.answer_1 = Button(parent=self, text='answer_1', x=self.answer_0.x, y=self.answer_0.y - self.spacing,
+                               scale=(1, .075),
                                text_origin=(-.5, 0), model=copy(self.button_model))
-        self.answer_2 = Button(parent=self, text='answer_2', x=self.answer_0.x, y=self.answer_1.y - self.spacing, scale=(1, .075),
+        self.answer_2 = Button(parent=self, text='answer_2', x=self.answer_0.x, y=self.answer_1.y - self.spacing,
+                               scale=(1, .075),
                                text_origin=(-.5, 0), model=copy(self.button_model))
-        self.answer_3 = Button(parent=self, text='answer_2', x=self.answer_0.x, y=self.answer_2.y - self.spacing, scale=(1, .075),
+        self.answer_3 = Button(parent=self, text='answer_2', x=self.answer_0.x, y=self.answer_2.y - self.spacing,
+                               scale=(1, .075),
                                text_origin=(-.5, 0), model=copy(self.button_model))
-        self.answer_4 = Button(parent=self, text='answer_2', x=self.answer_0.x, y=self.answer_3.y - self.spacing, scale=(1, .075),
+        self.answer_4 = Button(parent=self, text='answer_2', x=self.answer_0.x, y=self.answer_3.y - self.spacing,
+                               scale=(1, .075),
                                text_origin=(-.5, 0), model=copy(self.button_model))
         # self.answer3, 4 추가, 그러고 self.spacing 속성값을 조절했음. (버튼들간 간격조절)
 
         self.buttons = (self.answer_0, self.answer_1, self.answer_2, self.answer_3, self.answer_4)
         # 추가된 버튼 2개를 buttons 리스트에 추가 , 나머지 부분은 for문으로 알아서 초기화돼서 건든것 없음. 튜플 형태로 저장
-
-
 
         for b in self.buttons:
             b.text_entity.font = "NanumSquareRoundR.ttf"
@@ -73,16 +80,10 @@ class RenConversation(Entity):
         self.started = False
 
 
-
-        answer = self.list[0]
-
-        print(answer)
-        if answer != '학생회장':
-            self.gameOver()
-            return
-        self.success()
-
-    def ask(self, node, question_part=0): # 여기서 node값은 conversation_nodes[0] 부터 시작한다.
+    def createImg(self, value):
+        Entity(parent = self, scale = .55, y = 0.175, model = 'quad', texture = value)
+        print('hh')
+    def ask(self, node, question_part=0):  # 여기서 node값은 conversation_nodes[0] 부터 시작한다.
         # print(node)
         self.current_node = node
         self.question_part = question_part
@@ -91,11 +92,18 @@ class RenConversation(Entity):
         self.more_indicator.enabled = False
         self.question_appear_sequence = self.question.text_entity.appear(delay=.1)
 
+        if node.code:
+            if '#' in node.code:
+                self.variables_object.record_titles.add(node.code.strip('#'))
+                print(self.variables_object.record_titles)
+            else:
+                self.npc.texture = node.code
+
         for b in self.buttons:
             b.enabled = False
 
         answers = []
-        for i, child in enumerate(node.children): # i는 index, child는 node의 정보가 담긴 node객체를 뜻한다.
+        for i, child in enumerate(node.children):  # i는 index, child는 node의 정보가 담긴 node객체를 뜻한다.
 
             if self.variables_object and child.code and child.code.startswith('if'):
                 try:
@@ -119,8 +127,8 @@ class RenConversation(Entity):
         if not node.children:
             self.buttons[0].text = '*떠난다*'
             self.buttons[0].on_click = Func(setattr, self, 'enabled', False)
-            self.button_appear_sequence.append(Func(setattr, self.buttons[0], 'enabled', True))
 
+            self.button_appear_sequence.append(Func(setattr, self.buttons[0], 'enabled', True))
 
         for i, child in enumerate(answers):
 
@@ -129,11 +137,10 @@ class RenConversation(Entity):
             self.buttons[i].text = child.content[0]
             self.buttons[i].text_entity.wordwrap = self.wordwrap
 
-
             def on_click(node=child):
 
-                select = node.content[0] # 마지막 버튼의 content를 저장한다., index로 해도된다. 이 함수는 for문 안에 있음.
-                self.list.append(select) # 선택한 녀석들의 content나 text를 리스트에 저장해놓고 대화가 종료될 때 return
+                select = node.content[0]  # 마지막 버튼의 content를 저장한다., index로 해도된다. 이 함수는 for문 안에 있음.
+                self.list.append(select)  # 선택한 녀석들의 content나 text를 리스트에 저장해놓고 대화가 종료될 때 return
 
                 if not node.children:
                     print('end conversation')
@@ -142,18 +149,21 @@ class RenConversation(Entity):
 
                 if node.code and not node.code.startswith('if '):
                     try:
-                        if '+=' in node.code or '-=' in node.code or '*=' in node.code or '/=' in node.code:
+                        if '+=' in node.code or '-=' in node.code or '*=' in node.code or '/=' in node.code or '==' in node.code:
                             var, operator, value = node.code.split()
-                            original_value = getattr(self.variables_object, var)
-                            data_type = type(original_value)
-                            value = data_type(value)
-                            if operator == '+=':    new_value = original_value + value
-                            if operator == '-=':    new_value = original_value - value
-                            if operator == '*=':    new_value = original_value * value
-                            if operator == '/=':    new_value = original_value / value
 
-                            setattr(self.variables_object, var, new_value)
-                        print('executed code:', node.code)
+                            # original_value = getattr(self.variables_object, var)
+                            # data_type = type(original_value)
+                            # value = data_type(value)
+                            # if operator == '+=':    new_value = original_value + value
+                            # if operator == '-=':    new_value = original_value - value
+                            # if operator == '*=':    new_value = original_value * value
+                            if operator == '==':    self.createImg(value)
+
+                        #     setattr(self.variables_object, var, new_value)
+                        #
+                        # print('executed code:', node.code)
+                        # print(self.variables_object.sample_data)
                     except Exception as e:
                         print('failed executing code on node:', node, 'code:', node.code, 'error:', e)
 
@@ -161,13 +171,9 @@ class RenConversation(Entity):
                 if len(node.children) > 1:
                     print('error at node:', node, '. node has multiple children, but should only have one (a question)')
 
-
-
             self.buttons[i].on_click = on_click  # 첫번째 on_click은 ㅇ아마도 진짜 버튼의 이벤트핸들러에 의한 메서드고 뒤쪽 on_click은
-                                                # 여기 클래스에서 오버라이딩한 on_click인듯.
-                                                # button이 클릭되면 이 함수의 on_click메서드를 실행하겠다는 것.
-
-
+            # 여기 클래스에서 오버라이딩한 on_click인듯.
+            # button이 클릭되면 이 함수의 on_click메서드를 실행하겠다는 것.
 
     def input(self, key):
         if key == 'left mouse down' or key == 'space' and not mouse.hovered_entity in self.buttons:
@@ -194,7 +200,6 @@ class RenConversation(Entity):
         # print(self.conversation_nodes[1].content)
         # conversation_nodes는 node list로 입력받은 conversation str을 node클래스의 content에 특정 문자를 기준으로(enter, *등)잘라져서 content에 보관된다.
         self.started = True
-
 
     def parse_conversation(self, convo):
         convo = convo.strip()
