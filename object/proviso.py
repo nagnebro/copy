@@ -43,31 +43,31 @@ class Proviso(Entity):
         def compare_inventory(proviso_list): # 현재 유저의 인벤토리와 증거끼리 비교해서 인벤토리에 있는 증거라면 단서 수집 화면에서 disable처리함.
             for i in proviso_list:
                 for j in player_data.inventory:
-                    if (i.text == j.text):
+                    if (i.id == j.id):
                         i.disable()
 
 
 
 
         # proviso = 1의 속성은 각 용의자에 해당하는 단서의 아이디값으로 조합시에 이용하면 됨.
-        if player_data.chapter == 1:
+        if player_data.chapter == 1: # id값 말고 texture로 비교해도됨.
             background = Entity(parent=self, model='quad', texture='restroom', colr=color.white,
                                 scale=(camera.aspect_ratio, 1))
             proviso1_1 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2,
                                   x=.3,
-                                  y=.3, text='abcdefg', proviso=1)
-            proviso1_2 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2,
+                                  y=.3, text='abcdefg', proviso=1 , id="1-1")
+            proviso1_2 = MyButton(parent=self, model='quad', texture='blueprint', color=color.white, scale=.2,
                                   x=.2,
-                                  y=.3, text='text2.', proviso=1)
-            proviso1_3 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2,
+                                  y=.3, text='text2.', proviso=1, id= "1-2")
+            proviso1_3 = MyButton(parent=self, model='quad', texture='glass', color=color.white, scale=.2,
                                   x=.0,
-                                  y=.3, text='text3.', proviso=1)
+                                  y=.3, text='text3.', proviso=1, id="1-3")
             proviso1_4 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2,
                                   x=-.1,
-                                  y=.3, text='text4.', proviso=1)
+                                  y=.3, text='text4.', proviso=1, id="1-4")
             proviso1_5 = MyButton(parent= self, model='quad', texture='glass.png', color=color.white, scale=.2,
                                   x=-.2,
-                                  y=-.2, text='text5.', proviso=1)
+                                  y=-.2, text='text5.', proviso=1, id="1-5")
 
             proviso_list1 = [proviso1_1,proviso1_2,proviso1_3,proviso1_4,proviso1_5]
             compare_inventory(proviso_list1)
@@ -87,70 +87,71 @@ class Proviso(Entity):
 
 
         elif player_data.chapter == 2:
+            print("chater2 실행")
             background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
                                 scale=(camera.aspect_ratio, 1))
 
-            proviso2_1 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.3,
-                                y=.3, text='ㅁㄴㄹㅁㄴㄹ', proviso = 2)
-            proviso2_2 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.2,
-                                y=.3, text='text2.', proviso = 2)
+            proviso2_1 = MyButton(parent=self, model='quad', texture='paper.png', color=color.white, scale=.2, x=.3,
+                                y=.3, text='ㅁㄴㄹㅁㄴㄹ', proviso = 2, id="2-1")
+            proviso2_2 = MyButton(parent=self, model='quad', texture='poison', color=color.white, scale=.2, x=.2,
+                                y=.3, text='text2.', proviso = 2, id="2-2")
             proviso2_3 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.0,
-                                y=.3, text='text3.',proviso = 2)
+                                y=.3, text='text3.',proviso = 2, id="2-3")
             proviso2_4 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.1,
-                                y=.3, text='text4.', proviso = 2)
+                                y=.3, text='text4.', proviso = 2, id="2-4")
             proviso2_5 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.2,
-                                y=-.2, text='text5.', proviso = 2)
+                                y=-.2, text='text5.', proviso = 2, id="2-5")
 
             proviso_list2 = [proviso2_1,proviso2_2,proviso2_3,proviso2_4,proviso2_5]
             compare_inventory(proviso_list2)
 
-        elif player_data.chapter == 3:
-            background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
-                                scale=(camera.aspect_ratio, 1))
-
-            proviso1 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.3,
-                                y=.3, text='ㅁㄴㄹㅁㄴㄹ', proviso = 3)
-            proviso2 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.2,
-                                y=.3, text='text2.', proviso = 3)
-            proviso3 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.0,
-                                y=.3, text='text3.', proviso = 3)
-            proviso4 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.1,
-                                y=.3, text='text4.', proviso = 3)
-            proviso5 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.2,
-                                y=-.2, text='text5.', proviso = 3)
-
-
-
-        elif player_data.chapter == 4:
-            background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
-                                scale=(camera.aspect_ratio, 1))
-
-            proviso1 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.3,
-                                y=.3, text='ㅁㄴㄹㅁㄴㄹ',proviso = 4 )
-            proviso2 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.2,
-                                y=.3, text='text2.', proviso = 4)
-            proviso3 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.0,
-                                y=.3, text='text3.', proviso = 4)
-            proviso4 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.1,
-                                y=.3, text='text4.', proviso = 4)
-            proviso5 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.2,
-                                y=-.2, text='text5.', proviso = 4)
-
-
-        elif player_data.chapter == 5:
-            background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
-                                scale=(camera.aspect_ratio, 1))
-
-            proviso1 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.3,
-                                y=.3, text='ㅁㄴㄹㅁㄴㄹ', proviso = 5)
-            proviso2 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.2,
-                                y=.3, text='text2.', proviso = 5)
-            proviso3 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.0,
-                                y=.3, text='text3.', proviso = 5)
-            proviso4 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.1,
-                                y=.3, text='text4.', proviso = 5)
-            proviso5 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.2,
-                                y=-.2, text='text5.', proviso = 5)
+        # elif player_data.chapter == 3:
+        #     background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
+        #                         scale=(camera.aspect_ratio, 1))
+        #
+        #     proviso1 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.3,
+        #                         y=.3, text='ㅁㄴㄹㅁㄴㄹ', proviso = 3)
+        #     proviso2 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.2,
+        #                         y=.3, text='text2.', proviso = 3)
+        #     proviso3 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.0,
+        #                         y=.3, text='text3.', proviso = 3)
+        #     proviso4 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.1,
+        #                         y=.3, text='text4.', proviso = 3)
+        #     proviso5 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.2,
+        #                         y=-.2, text='text5.', proviso = 3)
+        #
+        #
+        #
+        # elif player_data.chapter == 4:
+        #     background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
+        #                         scale=(camera.aspect_ratio, 1))
+        #
+        #     proviso1 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.3,
+        #                         y=.3, text='ㅁㄴㄹㅁㄴㄹ',proviso = 4 )
+        #     proviso2 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.2,
+        #                         y=.3, text='text2.', proviso = 4)
+        #     proviso3 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.0,
+        #                         y=.3, text='text3.', proviso = 4)
+        #     proviso4 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.1,
+        #                         y=.3, text='text4.', proviso = 4)
+        #     proviso5 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.2,
+        #                         y=-.2, text='text5.', proviso = 4)
+        #
+        #
+        # elif player_data.chapter == 5:
+        #     background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
+        #                         scale=(camera.aspect_ratio, 1))
+        #
+        #     proviso1 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.3,
+        #                         y=.3, text='ㅁㄴㄹㅁㄴㄹ', proviso = 5)
+        #     proviso2 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.2,
+        #                         y=.3, text='text2.', proviso = 5)
+        #     proviso3 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=.0,
+        #                         y=.3, text='text3.', proviso = 5)
+        #     proviso4 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.1,
+        #                         y=.3, text='text4.', proviso = 5)
+        #     proviso5 = MyButton(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.2,
+        #                         y=-.2, text='text5.', proviso = 5)
 
 
         # 여기서 내가 만든 MyButton 클래스에서 매개변수로 **kwargs로 매개변수들을 받는다. 애초에 Entity랑 MyButton에서부터 가변 키워드 인자를 받아오고 있기 때문에

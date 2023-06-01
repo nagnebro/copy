@@ -1,5 +1,6 @@
 from ursina import *
 
+from ui.scene.renscene import RenScene
 from object.char.npc import Npc
 from object.char.player import Player
 from object.portal import Portal
@@ -29,14 +30,19 @@ class MapChapter(Entity):
         self.player.position = (0, 0, 0)
 
 
-        # 챕터 별 배치
         if chapter == 1:
+            RenScene(
+                background='',
+                script='prologue.txt',
+                font="NanumSquareRoundR.ttf"
+            )
+
             self.npc = Npc(parent=self, name='학생회장', image='stu_pr_0', background='inha_ware6_hall',
                            script='chapter1/chapter1.txt',
                            target=self.player, position=(1, 4))
             self.portal.set_next_chapter(2)
-            self.proviso = Entity(parent=self, name='화장실', model='cube', scale=2, position=(-3, 1, -1),
-                                  collider='box', color=color.orange)
+            self.proviso = Entity(parent=self, name='화장실', model='cabinet.obj', scale=3, position=(-3, 1),
+                                  collider='box', color=color.gray, rotation_x=90, rotation_z=-90)
 
         elif chapter == 2:
             self.npc = Npc(parent=self, name='졸업생', image='gradu_0', background='inha_ware6_hall',

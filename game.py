@@ -1,4 +1,4 @@
-from ursina import Entity
+from ursina import Entity, Audio
 import pickle
 
 from object.map.map_chapter import MapChapter
@@ -56,9 +56,11 @@ class Game(Entity):
         print('save and exit')
         exit()
 
-
     def input(self, key):
         if key == 'q':
             self.open_board()
         elif key == 'escape':
             self.open_escape()
+        elif key == 'space':
+            import random
+            a = Audio('aa', pitch=random.uniform(.5, 1), loop=True, autoplay=True)

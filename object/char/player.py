@@ -2,7 +2,7 @@ from ursina import *
 
 
 class Player(SpriteSheetAnimation):
-    def __init__(self, data, **kwargs):
+    def __init__(self, data, **kwargs): # 여기서 data는 player_data클래스의 player_data 객체를 뜻한다.
         super().__init__('Tressa', tileset_size=(6, 5), fps=8, collider='box', animations={
             'idle_left': ((1, 4), (1, 4)),
             'idle_right': ((0, 4), (0, 4)),
@@ -26,7 +26,6 @@ class Player(SpriteSheetAnimation):
     def input(self, key):
         if key == 'w up':
             self.play_animation('idle_right')
-            self.data.name = 'wtf'
         elif key == 's up':
             self.play_animation('idle_right')
         elif key == 'a up':
