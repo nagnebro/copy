@@ -25,6 +25,9 @@ class Info(Entity):
         guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="조합 q        이동 w,a,s,d        상호작용 e",
                      origin=(-.5, .5), scale=(1, 1), x=-.2, y=-.45, z=8)
 
+        guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="시험버전: 갈려나간 개발자의 끔찍한 비명소리 space",
+                     color=color.black66, origin=(-.5, .5), scale=(.8, .8), x=.4, y=-.48, z=8)
+
         title = Entity(parent=self, model='quad', texture='chapter_info', name='paper', color=color.white,
                        scale=(.4, .2), x=-.65, y=.36, z=8)
 

@@ -69,4 +69,4 @@ class Game(Entity):
             self.open_escape()
         elif key == 'space':
             import random
-            a = Audio('aa', pitch=random.uniform(.5, 1), loop=True, autoplay=True)
+            a = Audio('aa', pitch=random.uniform(.5, .7), loop=True, autoplay=True)
