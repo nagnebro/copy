@@ -10,8 +10,8 @@ window.borderless = False
 # 해상도 고정
 window.size = (1280, 720)
 
-# soundtrack = Audio("_resources/sound/background_music.wav", loop=True) # 배경음악 삽입.
-# soundtrack.play() 들으면서 하면 음침해서 꺼놨음. 정상작동함.
+soundtrack = Audio("_resources/sound/background_music.wav", loop=True) # 배경음악 삽입.
+soundtrack.play() #들으면서 하면 음침해서 꺼놨음. 정상작동함.
 
 # RenScene test 코드
 # menu = RenScene(variables_object=variables)
