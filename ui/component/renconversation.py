@@ -21,11 +21,14 @@ class RenConversation(Entity):
 
         self.question = Button(parent=self, text_origin=(0, .25), scale=(camera.aspect_ratio, .3), model="quad",
                                origin=(0, 0),
+                               texture='dialog',
+                               color=color.white,
                                position=(0, -.25),
                                text='Question')
         self.question.text_entity.font = "NanumSquareRoundR.ttf"
         self.question.text_entity.line_height = 1.25
-        # self.question.text_entity.position = (-.45, -.05)
+        self.question.text_entity.color = color.black
+        self.question.text_entity.position = (0, 0)
         self.question.highlight_color = self.question.color
 
         self.npc = Entity(parent=self, model='quad', texture='', position=(0, .1),

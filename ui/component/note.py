@@ -1,17 +1,26 @@
 from ursina import *
 
 from data.record_data import GameRecordData
+from ui.component.sprite_sheet_animation_unloop import SpriteSheetAnimationUnloop
 
 
-class Note(Entity):
+class Note(SpriteSheetAnimationUnloop):
     def __init__(self, player_data, resume=None):
-        super().__init__(
-            parent=camera.ui,
-            model=Quad(),
-            scale=(1.5, 1),
-            texture='note',
-            color=color.white,
-        )
+        # super().__init__(
+        #     'open_book',
+        #     parent=camera.ui,
+        #     scale=1.6,
+        #     color=color.white,
+        #     y=.05, autoplay=True, loop=False, fps=6
+        # )
+        super().__init__('Book', tileset_size=(17, 3), y=.05,
+                         scale=1.6, fps=8, parent=camera.ui, animations={
+            'open': ((1, 2), (16, 2)),
+            'flip_left': ((1, 1), (8, 1)),
+            'flip_right': ((1, 0), (8, 0)),
+        })
+        self.play_animation('open')
+
         self.index = 0
 
         self.text_title = Text(parent=self, font="NanumSquareRoundB.ttf", text='', position=(0, .2, -1), scale=(2, 1.25))
@@ -32,6 +41,7 @@ class Note(Entity):
         self.text_desc.text = self.playerRecordData[index].desc
 
     def next_page(self):
+        self.play_animation('flip_left')
         # 인덱스가 전체 기록 수 보다 클 경우, 다음 페이지 없음
         if self.index >= len(self.playerRecordData):
             return
@@ -39,6 +49,7 @@ class Note(Entity):
             self.print_record(self.index)
 
     def prev_page(self):
+        self.play_animation('flip_right')
         # 인덱스가 0 보다 작을 경우, 이전 페이지 없음
         if self.index >= 0:
             return

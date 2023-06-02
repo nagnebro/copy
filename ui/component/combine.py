@@ -18,12 +18,12 @@ class Combine(Entity):
     def __init__(self, **kwargs):
         super().__init__(
             parent=camera.ui,
-            model=Quad(radius=.015),
-            texture='white_cube',
-            scale=(.5, .8),
+            model='quad',
+            scale=.8,
+            texture='combine_table',
             origin=(.5, .5),
-            position=(.8, .4, -1),
-            color=color.color(0, 0, .1, .9),
+            position=(.8, .4, -2),
+            color=color.white
         )
 
         for key, value in kwargs.items():
@@ -31,18 +31,26 @@ class Combine(Entity):
 
         self.items = []
 
-        item0 = Entity(parent=self, model='quad', color=color.rgba(255, 255, 255, 100), origin=(0, .5),
-                       scale=(.2, .125), x=-.8, y=-.2, z=-1)
-        item1 = Entity(parent=self, model='quad', color=color.rgba(255, 255, 255, 100), origin=(0, .5),
-                       scale=(.2, .125), x=-.5, y=-.2, z=-1)
-        item2 = Entity(parent=self, model='quad', color=color.rgba(255, 255, 255, 100), origin=(0, .5),
-                       scale=(.2, .125), x=-.2, y=-.2, z=-1)
+        item0 = Entity(parent=self, origin=(0, .5),
+                       scale=(.2, .2), x=-.64, y=-.13, z=-1)
+        item1 = Entity(parent=self, origin=(0, .5),
+                       scale=(.2, .2), x=-.36, y=-.13, z=-1)
 
-        result = Entity(parent=self, model='quad', color=color.rgba(255, 255, 255, 100), origin=(0, .5),
-                        scale=(.2, .125), x=-.5, y=-.6, z=-1)
+        item2 = Entity(parent=self, origin=(0, .5),
+                       scale=(.2, .2), x=-.77, y=-.4, z=-1)
+        result = Entity(parent=self, origin=(0, .5),
+                        scale=(.2, .2), x=-.5, y=-.4, z=-1)
+        item3 = Entity(parent=self, origin=(0, .5),
+                       scale=(.2, .2), x=-.23, y=-.4, z=-1)
+
+        item4 = Entity(parent=self, origin=(0, .5),
+                       scale=(.2, .2), x=-.64, y=-.67, z=-1)
+        item5 = Entity(parent=self, origin=(0, .5),
+                       scale=(.2, .2), x=-.36, y=-.67, z=-1)
+
 
         guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="'V' 길게 눌러서 조합",
-                     origin=(1.2, .5), position=(0, -.9, -1), scale=(2, 1.25))
+                     origin=(.5, .5), position=(1, -.9, -1))
 
     def append(self, item_name):
         print('add item:', item_name)
