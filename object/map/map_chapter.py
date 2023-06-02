@@ -13,7 +13,7 @@ class MapChapter(Entity):
         self.player_data = player_data
         self.item_data = item_data
         self.proviso = Entity()
-        self.portal = Portal(parent=self, position=(12, 0, 0))
+        self.portal = Portal(parent=self, position=(7, 0, 0))
         self.player = Player(player_data)  # 여기서 player 객체를 생성, mapchapter는 새게임이나 계속하기 선택시 실행되는 파일임. game.py 파일에서 계속 data를 저장하고 있는 상태.
         self.passed = False
         self.pro_passed = False
@@ -37,32 +37,32 @@ class MapChapter(Entity):
 
             self.npc = Npc(parent=self, name='학생회장', image='stu_pr_0', background='inha_ware6_hall',
                            script='chapter1/chapter1.txt',
-                           target=self.player, position=(1, 4))
+                           target=self.player, position=(5, 1))
             self.portal.set_next_chapter(2)
-            self.proviso = Entity(parent=self, name='화장실', model='cabinet.obj', scale=3, position=(-3, 1),
-                                  collider='box', color=color.gray, rotation_x=90, rotation_z=-90)
+            self.proviso = Entity(parent=self, name='화장실', model='quad', scale=3, position=(-5, 1),
+                                  collider='box', color=color.gray)
 
         elif chapter == 2:
             self.npc = Npc(parent=self, name='졸업생', image='gradu_0', background='inha_ware6_hall',
                            script='chapter2/chapter2.txt',
-                           target=self.player, position=(1, 1))
+                           target=self.player, position=(4, 1))
             self.portal.set_next_chapter(3)
-            self.proviso = Entity(parent=self, name='복도', model='cube', scale=(2, 4, 1), position=(3, 1, -0.5),
+            self.proviso = Entity(parent=self, name='복도', model='quad', scale=(2, 4), position=(-5, 1),
                         collider='box', color=color.azure)
 
         elif chapter == 3:
             self.npc = Npc(parent=self, name='동아리 선배', image='club_leader_0', background='inha_ware6_hall',
                            script='chapter3/chapter3.txt',
-                           target=self.player, position=(1, 4))
+                           target=self.player, position=(4, 1))
             self.npc.play_animation('idle_left')
             self.portal.set_next_chapter(4)
-            # b3 = Entity(parent=inha_map, name='동아리실', model='cube', scale=(2, 4, 1), position=(2, 4, -0.5),
+            # b3 = Entity(parent=inha_map, name='동아리실', model='quad', scale=(2, 4, 1), position=(2, 4, -0.5),
             # collider='box', color=color.black)
 
         elif chapter == 4:
             self.npc = Npc(parent=self, name='남교수', image='prof_nam_0', background='inha_ware6_hall',
                            script='chapter4/chapter4.txt',
-                           target=self.player, position=(1, 4))
+                           target=self.player, position=(4, 1))
             self.npc.play_animation('idle_left')
             self.portal.set_next_chapter(5)
             # b4 = Entity(parent=inha_map, name='주차장', model='cube', scale=4, position=(6, 4, -2), collider='box',
@@ -70,7 +70,7 @@ class MapChapter(Entity):
         elif chapter == 5:
             self.npc = Npc(parent=self, name='전 애인', image='ex_gf_0', background='inha_ware6_hall',
                            script='chapter5/chapter5.txt',
-                           target=self.player, position=(1, 4))
+                           target=self.player, position=(4, 1))
             self.npc.play_animation('idle_right')
             self.portal.set_next_chapter(1)
             # b5 = Entity(parent=inha_map, name='자취방', model='cube', scale=(4, 2, 1), position=(0, -4, -0.5),

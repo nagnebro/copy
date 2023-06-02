@@ -18,7 +18,6 @@ class Npc(SpriteSheetAnimation):
         self.z = -0.5
         self.scale_y = 1.5
         self.scale_x = 0.9
-        self.rotation_x = -45
 
         self.conversation = None
         self.cube = Entity(parent=self, model='cube', collider='box', color=color.clear)
