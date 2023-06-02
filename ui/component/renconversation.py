@@ -15,7 +15,7 @@ class Node:
 
 
 class RenConversation(Entity):
-    def __init__(self, font, variables_object=None, **kwargs):
+    def __init__(self, font=None, variables_object=None, **kwargs):
         super().__init__(y=-.1)
         self.image = None
 
@@ -79,6 +79,10 @@ class RenConversation(Entity):
         self.button_appear_sequence = None
         self.started = False
 
+
+    def createImg(self, value):
+        Entity(parent = self, scale = .55, y = 0.175, model = 'quad', texture = value)
+        print('hh')
     def ask(self, node, question_part=0):  # 여기서 node값은 conversation_nodes[0] 부터 시작한다.
         # print(node)
         self.current_node = node
@@ -145,21 +149,21 @@ class RenConversation(Entity):
 
                 if node.code and not node.code.startswith('if '):
                     try:
-                        if '+=' in node.code or '-=' in node.code or '*=' in node.code or '/=' in node.code:
+                        if '+=' in node.code or '-=' in node.code or '*=' in node.code or '/=' in node.code or '==' in node.code:
                             var, operator, value = node.code.split()
 
-                            original_value = getattr(self.variables_object, var)
-                            data_type = type(original_value)
-                            value = data_type(value)
-                            if operator == '+=':    new_value = original_value + value
-                            if operator == '-=':    new_value = original_value - value
-                            if operator == '*=':    new_value = original_value * value
-                            if operator == '/=':    new_value = original_value / value
+                            # original_value = getattr(self.variables_object, var)
+                            # data_type = type(original_value)
+                            # value = data_type(value)
+                            # if operator == '+=':    new_value = original_value + value
+                            # if operator == '-=':    new_value = original_value - value
+                            # if operator == '*=':    new_value = original_value * value
+                            if operator == '==':    self.createImg(value)
 
-                            setattr(self.variables_object, var, new_value)
-
-                        print('executed code:', node.code)
-                        print(self.variables_object.sample_data)
+                        #     setattr(self.variables_object, var, new_value)
+                        #
+                        # print('executed code:', node.code)
+                        # print(self.variables_object.sample_data)
                     except Exception as e:
                         print('failed executing code on node:', node, 'code:', node.code, 'error:', e)
 
