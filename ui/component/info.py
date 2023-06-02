@@ -22,10 +22,10 @@ class Info(Entity):
                           scale=(2, 1),
                           color=color.rgba(0, 0, 0, 180), z=8)
 
-        guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="조합 q        이동 w,a,s,d        상호작용 e",
+        guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="'Q' 조합        'W,A,S,D' 이동        'E' 상호작용:",
                      origin=(-.5, .5), scale=(1, 1), x=-.2, y=-.45, z=8)
 
-        guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="시험버전: 갈려나간 개발자의 끔찍한 비명소리 space",
+        guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="'space' 시험버전: 갈려나간 개발자의 끔찍한 비명",
                      color=color.black66, origin=(-.5, .5), scale=(.8, .8), x=.4, y=-.48, z=8)
 
         title = Entity(parent=self, model='quad', texture='chapter_info', name='paper', color=color.white,
