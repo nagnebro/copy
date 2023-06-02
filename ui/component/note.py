@@ -23,8 +23,8 @@ class Note(SpriteSheetAnimationUnloop):
 
         self.index = 0
 
-        self.text_title = Text(parent=self, font="NanumSquareRoundB.ttf", text='', position=(0, .2, -1), scale=(2, 1.25))
-        self.text_desc = Text(parent=self, font="NanumSquareRoundB.ttf", text='', position=(0, .1, -1), scale=(2, 1.25))
+        self.text_title = Text(parent=self, font="NanumSquareRoundB.ttf", text='', position=(0, .2, -1))
+        self.text_desc = Text(parent=self, font="NanumSquareRoundR.ttf", text='', position=(0, .1, -1))
 
         self.resume = resume
         print(player_data.record_titles)
