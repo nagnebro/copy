@@ -17,6 +17,11 @@ class RenScene(Entity):
             convo = dedent(data)
             conversation.start_conversation(convo)
 
+        gradient_v = Entity(model='quad', texture='vertical_gradient', parent=conversation,
+                            rotation_z=180,
+                            scale=(2, 1),
+                            color=color.rgba(0, 0, 0, 180), world_y=0, z=2)
+
         background = Entity(parent=conversation, model='quad', texture=background,
                             scale=(camera.aspect_ratio, 1),
                             color=color.white, z=4, world_y=0)

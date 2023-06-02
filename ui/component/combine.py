@@ -22,7 +22,7 @@ class Combine(Entity):
             scale=.8,
             texture='combine_table',
             origin=(.5, .5),
-            position=(.8, .4, -2),
+            position=(.8, .4, 1),
             color=color.white
         )
 

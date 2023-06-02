@@ -29,11 +29,12 @@ class MapChapter(Entity):
         wall.scale *= 2
 
         if chapter == 1:
-            RenScene(
-                background='',
-                script='prologue.txt',
-                font="NanumSquareRoundR.ttf"
-            )
+            # 프롤로그
+            # RenScene(
+            #     background='',
+            #     script='prologue.txt',
+            #     font="NanumSquareRoundR.ttf"
+            # )
 
             self.npc = Npc(parent=self, name='학생회장', image='stu_pr_0', background='inha_ware6_hall',
                            script='chapter1/chapter1.txt',

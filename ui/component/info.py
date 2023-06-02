@@ -17,6 +17,11 @@ class Info(Entity):
     def __init__(self, chapter):
         super().__init__(parent=camera.ui)
 
+        gradient_v = Entity(model='quad', texture='vertical_gradient', parent=self,
+                          rotation_z=180,
+                          scale=(2, 1),
+                          color=color.rgba(0, 0, 0, 180), z=8)
+
         guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="조합 q        이동 w,a,s,d        상호작용 e",
                      origin=(-.5, .5), scale=(1, 1), x=-.2, y=-.45, z=8)
 
