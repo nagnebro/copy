@@ -22,7 +22,7 @@ class Info(Entity):
                           scale=(2, 1),
                           color=color.rgba(0, 0, 0, 180), z=8)
 
-        guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="'Q' 조합        'W,A,S,D' 이동        'E' 상호작용:",
+        guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="'Q' 조합      'W,A,S,D' 이동      'E' 상호작용:     M : 배경음악 On/Off",
                      origin=(-.5, .5), scale=(1, 1), x=-.2, y=-.45, z=8)
 
         guide = Text(parent=self, font="NanumSquareRoundB.ttf", text="'space' 시험버전: 갈려나간 개발자의 끔찍한 비명",

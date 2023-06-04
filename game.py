@@ -1,4 +1,4 @@
-from ursina import Entity, Audio
+from ursina import Entity, Audio, camera, color
 import pickle
 
 from data.item_data import GameItemData
@@ -8,9 +8,13 @@ from ui.scene.boardmenu import BoardMenu
 from ui.scene.escapemenu import EscapeMenu
 from ui.scene.mainmenu import MainMenu
 from ui.component.info import Info
+from ui.scene.renscene import RenScene
+
 
 
 class Game(Entity):
+
+
 
     def __init__(self, player_name, menu=MainMenu):
         super().__init__()
@@ -22,6 +26,17 @@ class Game(Entity):
 
         self.ui = None
         self.chapter = None
+
+
+        self.video = Entity(parent=camera.ui, model='quad', texture='zelda_trailer.mp4',
+                       scale=(camera.aspect_ratio, 1),
+                       color=color.white, z=4, world_y=0)
+
+        # 싱크가 맞는진 모르겠으나. .. audio 재생이 됩니다.
+        self.sound = Audio("_resources/video/zelda_trailer.mp4", loop=True)
+
+        # soundtrack = Audio("_resources/sound/prologue.wav", loop=True) # 배경음악 삽입.
+        # soundtrack.play() #들으면서 하면 음침해서 꺼놨음. 정상작동함.
 
     def load_player_data(self, player_name):
         try:
@@ -67,6 +82,19 @@ class Game(Entity):
             self.open_note()
         elif key == 'escape':
             self.open_escape()
+
+        elif key == 'm': # 배경음악끄기 mute
+            if(self.sound.loop):
+                print('hi')
+                self.sound.loop  = False
+                self.video.disable()
+                self.sound.stop()
+                # self.video.disable()
+                return
+            self.sound.loop = True
+            self.sound.play()
         elif key == 'space':
             import random
             a = Audio('aa', pitch=random.uniform(.5, .7), loop=True, autoplay=True)
+
+
