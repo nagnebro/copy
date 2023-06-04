@@ -2,7 +2,7 @@ from ursina import Entity, Audio
 import pickle
 
 from data.item_data import GameItemData
-from object.map.map_chapter import MapChapter
+from object.map_chapter import MapChapter
 from ui.component.note import Note
 from ui.scene.boardmenu import BoardMenu
 from ui.scene.escapemenu import EscapeMenu

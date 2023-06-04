@@ -1,6 +1,5 @@
 from ursina import *
 
-from data.player_data import PlayerData
 from ui.scene.mainmenu import MainMenu
 from game import Game
 

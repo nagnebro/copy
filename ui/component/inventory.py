@@ -14,13 +14,10 @@ class Inventory(Entity):
             origin=(-.5, .5),
             position=(-.8, .4),
             color=color.color(0, 0, .1, .9),
-
-
         )
 
         for item in player_data.inventory: # Mybutton 객체가 들어있는 inventory list
             self.append(item)
-
 
         for key, value in kwargs.items():
             setattr(self, key, value)
