@@ -13,10 +13,11 @@ class GameItemData:
         self.item = {
 
             # 1. 학생회장의 단서.
-            "떨어진 영수증": ItemData("떨어진 영수증", "샌드위치를 구매한 영수증이다.", 1, 'glass'),
+            "떨어진 영수증": ItemData("떨어진 영수증", "샌드위치를 구매한 영수증이다.", 1, 'receipt'),
             "내려치기 딱 좋은 망치": ItemData("망치.", "내려치기에 좋은 망치다.", 1, 'hammer'),
             "마스터 키": ItemData("동아리실 마스터", "동아리 실의 마스터 키다.", 1, 'master_key'),
             "휴대폰": ItemData("휴대폰", "학생회장의 휴대폰이다.", 1, 'galaxy_phone'),
+            "영수증": ItemData("영수증", "편의점 구매내역이 적혀있는 영수증이다.", 1, 'receipt'),
             # "휴대폰": ItemData("테스트 아이템2", "테스트 하려고 은만든 아이템이다2", 1, 'glass'),
 
 
@@ -31,7 +32,7 @@ class GameItemData:
 
             # 3. 동아리 선배의 단서
             "커터칼": ItemData("커터칼", "날카로운 커터칼이다.", 3, 'cutter_knife'),
-            "쪽지": ItemData("쪽지", "누군가에 관한 욕이 담겨있는 쪽지이다.", 3, 'paper1'),
+            "쪽지": ItemData("쪽지", "누군가를 향한 집착이 담긴 쪽지이다.", 3, 'paper1'),
             "밧줄": ItemData("밧줄", "무엇인가 묶을 때 쓰는 밧줄이다.", 3, 'rope'),
             # "마스터 키": ItemData("마스터 키", "마스커 키다.", 3, 'master_key'),
 

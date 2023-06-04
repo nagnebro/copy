@@ -3,7 +3,7 @@ from ursina import *
 double_check = True
 
 
-class Proviso(Button):
+class Proviso(Draggable):
     player_data = None  # 클래스 변수를 이용해 모든 Button이 공통된 player_data를 공유한다
 
     def __init__(self, **kwargs):
@@ -60,8 +60,8 @@ class Proviso(Button):
                 model=Quad(radius=.015),
                 texture='white_cube',
 
-                scale=(.7, .4),
-                z=-1, world_y=0,  # 화면을 정면으로 바라봤을 떄 우리가 일반적으로 생각하는 수학의 좌표평면이 있다. 그리고 현재 내가 바라보는 위치에서 원점으로 갈수록
+                scale=(1.2, .9),
+                z=-3,  # 화면을 정면으로 바라봤을 떄 우리가 일반적으로 생각하는 수학의 좌표평면이 있다. 그리고 현재 내가 바라보는 위치에서 원점으로 갈수록
                 # z축의 값은 +가 되고 나와 가까워질수록 -값이 된다. 즉 z의 속성값을 +로 설정할 시 객체들(texture)들 밑에 묻히기 때문에
                 # 보이지 않게 되는 것이다. 따라서 -로 설정하면 거의 절대적으로 보인다고 할 수 있겠다. (z-index)
 
@@ -71,13 +71,13 @@ class Proviso(Button):
                 # Draggable클래스 역시 button클래스를 상속받으므로 이 기능을 추가하지 않으면 창이 클릭이 되는 이상한 상황이 발생하므로 True로 버튼의 기능을 disable시켜준다.
                 # draggin -> drag 가능 유무를 결정하는 속성값
 
-                text=self.desc
+
 
             )  # Entity 객체에서는 text 속성이없음. button속성에 있기 때문에 draggable 클래스나 button클래스에서만 지정해야 text가 보인다.
             # 결론적으로 단서들을 button이나 draggable 타입으로 만들어야 할 이유가 명확한 것.
 
-            print(self.desc)
-            self.screen.text_entity.font = "NanumSquareRoundR.ttf"
+            # print(self.desc)
+            # self.screen.text_entity.font = "NanumSquareRoundR.ttf"
 
 
 
@@ -87,9 +87,10 @@ class Proviso(Button):
 
                 parent=camera.ui,
                 model='quad',
-                scale=(.2, .2),
+                scale=(.15, .1),
+                radius=1,
                 z=-1,
-                text='닫기',
+                text='확인',
                 color=color.gray,
 
             )
@@ -97,19 +98,23 @@ class Proviso(Button):
             img = Entity(
                 parent=camera.ui,
                 model='quad',
-                scale=(.3, .2),
+                scale=(.7, .7),
                 z=-1,
                 texture=self.texture,
                 color=color.white,
 
             )
+            text = Text(text = self.desc, origin = (0,0))
+            text.font = "NanumSquareRoundR.ttf"
 
             btn.text_entity.font = "NanumSquareRoundR.ttf"
-
+            # text.text_entity.font = "NanumSquareRoundR.ttf"
             btn.parent = self.screen  # entity요소끼리 서로 부모 자식 관계를 맺어주면 객체끼리 상대적인 포지션을 가지고 붙어다닐 수 있다.
             img.parent = self.screen  # img 요소도 스크린과 묶어놓는다.
-            img.position = (0, 0.3, -1)
-            btn.position = (0, -0.35, -1)
+            text.parent = self.screen # 텍스트 박스 생성.
+            img.position = (0, 0.15, -1)
+            btn.position = (0, -.35, -1)
+            text.position = (0,-.2,-1)
             btn.on_click = self.close_screen
 
 

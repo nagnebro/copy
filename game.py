@@ -8,14 +8,9 @@ from ui.scene.boardmenu import BoardMenu
 from ui.scene.escapemenu import EscapeMenu
 from ui.scene.mainmenu import MainMenu
 from ui.component.info import Info
-from ui.scene.renscene import RenScene
-
 
 
 class Game(Entity):
-
-
-
     def __init__(self, player_name, menu=MainMenu):
         super().__init__()
         self.player_data = None
@@ -27,6 +22,7 @@ class Game(Entity):
         self.ui = None
         self.chapter = None
 
+
         #
         # self.video = Entity(parent=camera.ui, model='quad', texture='zelda_trailer.mp4',
         #                scale=(camera.aspect_ratio, 1),
@@ -34,6 +30,8 @@ class Game(Entity):
         #
         # # 싱크가 맞는진 모르겠으나. .. audio 재생이 됩니다.
         # self.sound = Audio("_resources/video/zelda_trailer.mp4", loop=True)
+
+
 
         # soundtrack = Audio("_resources/sound/prologue.wav", loop=True) # 배경음악 삽입.
         # soundtrack.play() #들으면서 하면 음침해서 꺼놨음. 정상작동함.
@@ -50,13 +48,13 @@ class Game(Entity):
             pickle.dump(player_data, file)
         self.load_player_data(player_data.name)
 
-    def start_chapter(self, num=1):
+    def start_chapter(self):
         print(self.menu)
         self.menu.disable()
         # print(self.menu)
         # self.menu.disable()
-        self.ui = Info(num)
-        self.chapter = MapChapter(self.player_data, self.item_data, num)
+        self.ui = Info()
+        self.chapter = MapChapter(self)
 
     def open_board(self):
         self.ui.disable()
@@ -83,18 +81,16 @@ class Game(Entity):
         elif key == 'escape':
             self.open_escape()
 
-        elif key == 'm': # 배경음악끄기 mute
-            if(self.sound.loop):
-                print('hi')
-                self.sound.loop  = False
-                self.video.disable()
-                self.sound.stop()
-                # self.video.disable()
-                return
-            self.sound.loop = True
-            self.sound.play()
+        # elif key == 'm':  # 배경음악끄기 mute
+        #     if (self.sound.loop):
+        #         print('hi')
+        #         self.sound.loop = False
+        #         self.video.disable()
+        #         self.sound.stop()
+        #         # self.video.disable()
+        #         return
+        #     self.sound.loop = True
+        #     self.sound.play()
         elif key == 'space':
             import random
             a = Audio('aa', pitch=random.uniform(.5, .7), loop=True, autoplay=True)
-
-

@@ -37,7 +37,7 @@ app = Ursina()
 #
 #
 
-RenScene(background = None, )
+다RenScene(background = None, )
 
 RenScene( background=None, script = "",font = "NanumSquareRoundB.ttf")
 
