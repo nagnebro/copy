@@ -31,8 +31,11 @@ class RenConversation(Entity):
         self.question.text_entity.position = (0, 0)
         self.question.highlight_color = self.question.color
 
-        self.npc = Entity(parent=self, model='quad', texture='', position=(0, .1),
-                          scale=(camera.aspect_ratio / 3, camera.aspect_ratio / 3), z=3)
+
+        if variables_object != None:
+            self.npc = Entity(parent=self, model='quad', texture='', position=(0, .1),
+                              scale=(camera.aspect_ratio / 3, camera.aspect_ratio / 3), z=3)
+
 
         self.more_indicator = Entity(parent=self.question, model=Circle(3), position=(.4, .2, -.1), rotation_z=180,
                                      color=color.azure, world_scale=.0, z=-1, disabled=True)
@@ -83,9 +86,9 @@ class RenConversation(Entity):
         self.started = False
 
 
-    def createImg(self, value):
-        Entity(parent = self, scale = .55, y = 0.175, model = 'quad', texture = value)
-        print('hh')
+    # def createImg(self, value):
+    #     Entity(parent = self, scale = .55, y = 0.175, model = 'quad', texture = value)
+    #     print('hh')
     def ask(self, node, question_part=0):  # 여기서 node값은 conversation_nodes[0] 부터 시작한다.
         # print(node)
         self.current_node = node
@@ -100,6 +103,7 @@ class RenConversation(Entity):
                 self.variables_object.record_titles.add(node.code.strip('#'))
                 print(self.variables_object.record_titles)
             else:
+                print(node.code)
                 self.npc.texture = node.code
 
         for b in self.buttons:
@@ -161,7 +165,7 @@ class RenConversation(Entity):
                             # if operator == '+=':    new_value = original_value + value
                             # if operator == '-=':    new_value = original_value - value
                             # if operator == '*=':    new_value = original_value * value
-                            if operator == '==':    self.createImg(value)
+                            # if operator == '==':    self.createImg(value)
 
                         #     setattr(self.variables_object, var, new_value)
                         #

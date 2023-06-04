@@ -1,9 +1,9 @@
 from ursina import *
 
+from object.sprite_map import SpriteMap
 from object.npc import Npc
 from object.player import Player
-from object.proviso import Proviso
-from object.sprite_map import SpriteMap
+from object.find_proviso import Find_Proviso
 
 
 class MapChapter(Entity):
@@ -36,11 +36,11 @@ class MapChapter(Entity):
         #     script='prologue.txt',
         #     font="NanumSquareRoundR.ttf"
         # )
-        Npc(parent=self, name='학생회장', image='stu_pr_0', background='inha_ware6_hall',
+        Npc(parent=self, name='학생회장', image='stu_pr_0', background='entrance1',
             script='chapter1/chapter1.txt', target=self.player, position=(-7.2, 1)).play_animation('idle_right')
-        Npc(parent=self, name='졸업생', image='gradu_0', background='inha_ware6_hall',
+        Npc(parent=self, name='졸업생', image='gradu_0', background='third_floor',
             script='chapter2/chapter2.txt', target=self.player, position=(-3, -1.1)).play_animation('idle_right')
-        Npc(parent=self, name='동아리 선배', image='club_leader_0', background='inha_ware6_hall',
+        Npc(parent=self, name='동아리 선배', image='club_leader_0', background='second_floor1',
             script='chapter3/chapter3.txt', target=self.player, position=(3, 1)).play_animation('idle_left')
 
         self.proviso = Entity(parent=self, name='화장실', model='quad', scale=3, position=(-5, 1),
@@ -50,24 +50,37 @@ class MapChapter(Entity):
 
         # b3 = Entity(parent=inha_map, name='동아리실', model='quad', scale=(2, 4, 1), position=(2, 4, -0.5),
         # collider='box', color=color.black)
-        self.npc = Npc(parent=self, name='전 애인', image='ex_gf_0', background='inha_ware6_hall',
+        self.npc = Npc(parent=self, name='전 애인', image='ex_gf_0', background='gf1',
                        script='chapter5/chapter5.txt',
                        target=self.player, position=(4, 1))
         self.npc.play_animation('idle_right')
         # b5 = Entity(parent=inha_map, name='자취방', model='cube', scale=(4, 2, 1), position=(0, -4, -0.5),
         #             collider='box', color=color.dark_gray)
 
-        self.npc = Npc(parent=self, name='남교수', image='prof_nam_0', background='inha_ware6_hall',
+        self.npc = Npc(parent=self, name='남교수', image='prof_nam_0', background='garage',
                        script='chapter4/chapter4.txt',
                        target=self.player, position=(4, 1))
         self.npc.play_animation('idle_left')
         # b4 = Entity(parent=inha_map, name='주차장', model='cube', scale=4, position=(6, 4, -2), collider='box',
         #             color=color.white)
 
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+    def check(self):
+        input()
+        return True
+
+    def input(self,key=None):
+        if key == "x":
+            print(key)
+            return True
+
     def update(self):
         camera.position = (self.player.x, self.player.y)
 
-    def input(self, key): # 단서수집 포탈 근처에 갔을 떄 키를 눌러야 동작하게끔(Npc와 말거는 거처럼)
+    def input(self, key):
+        # 단서수집 포탈 근처에 갔을 떄 키를 눌러야 동작하게끔(Npc와 말거는 거처럼)
         if self.proviso.intersects(self.player) and key == 'e':
             self.pro_passed = True
-            Proviso(self.player_data, self.item_data)
+            Find_Proviso(self.player_data, self.item_data)
