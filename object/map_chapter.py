@@ -67,14 +67,6 @@ class MapChapter(Entity):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def check(self):
-        input()
-        return True
-
-    def input(self,key=None):
-        if key == "x":
-            print(key)
-            return True
 
     def update(self):
         camera.position = (self.player.x, self.player.y)

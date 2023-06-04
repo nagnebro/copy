@@ -32,7 +32,7 @@ class RenConversation(Entity):
         self.question.highlight_color = self.question.color
 
 
-        if variables_object != None:
+        if variables_object != None: # 객체 없을 떄는 npc 모델 생성안함
             self.npc = Entity(parent=self, model='quad', texture='', position=(0, .1),
                               scale=(camera.aspect_ratio / 3, camera.aspect_ratio / 3), z=3)
 

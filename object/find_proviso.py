@@ -6,9 +6,6 @@ from prec.my_test.proviso import Proviso
 class Find_Proviso(Entity):
 
 
-
-
-
     def __init__(self, player_data, item_data, **kwargs):
         super().__init__(parent=camera.ui, **kwargs)
         self.item_data = item_data
@@ -127,7 +124,7 @@ class Find_Proviso(Entity):
 
 
             background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
-                                scale=(camera.aspect_ratio, 1))
+                                scale=(camera.aspect_ratio, 1),)
 
 
             proviso2_1 = Proviso(parent=self, model='quad', texture=self.item2_1.texture, color=color.white, scale=.2,

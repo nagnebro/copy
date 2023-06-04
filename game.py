@@ -27,13 +27,13 @@ class Game(Entity):
         self.ui = None
         self.chapter = None
 
-
-        self.video = Entity(parent=camera.ui, model='quad', texture='zelda_trailer.mp4',
-                       scale=(camera.aspect_ratio, 1),
-                       color=color.white, z=4, world_y=0)
-
-        # 싱크가 맞는진 모르겠으나. .. audio 재생이 됩니다.
-        self.sound = Audio("_resources/video/zelda_trailer.mp4", loop=True)
+        #
+        # self.video = Entity(parent=camera.ui, model='quad', texture='zelda_trailer.mp4',
+        #                scale=(camera.aspect_ratio, 1),
+        #                color=color.white, z=4, world_y=0)
+        #
+        # # 싱크가 맞는진 모르겠으나. .. audio 재생이 됩니다.
+        # self.sound = Audio("_resources/video/zelda_trailer.mp4", loop=True)
 
         # soundtrack = Audio("_resources/sound/prologue.wav", loop=True) # 배경음악 삽입.
         # soundtrack.play() #들으면서 하면 음침해서 꺼놨음. 정상작동함.
