@@ -45,12 +45,12 @@ class MainMenu(Entity):
 
         new_game_sequence = Sequence()
         new_game_sequence.append(Func(game.save_player_data, PlayerData(name='김이조', chapter=1)))
-        new_game_sequence.append(Func(game.start_chapter, 1))
+        new_game_sequence.append(Func(game.start_chapter))
 
         btn_new_game.on_click = new_game_sequence
 
         if game.player_data is not None:
-            btn_continue.on_click = Func(game.start_chapter, game.player_data.chapter)
+            btn_continue.on_click = Func(game.start_chapter)
         btn_exit.on_click = exit
 
     def start_new_game(self):

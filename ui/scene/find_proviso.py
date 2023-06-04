@@ -2,14 +2,8 @@ from ursina import *
 from prec.my_test.proviso import Proviso
 
 
-
 class Find_Proviso(Entity):
-
-
-
-
-
-    def __init__(self, player_data, item_data, **kwargs):
+    def __init__(self, player_data, item_data, number, **kwargs):
         super().__init__(parent=camera.ui, **kwargs)
         self.item_data = item_data
 
@@ -18,24 +12,19 @@ class Find_Proviso(Entity):
         self.item1_3 = item_data.item["마스터 키"]
         self.item1_4 = item_data.item["휴대폰"]
 
-
-
         self.item2_1 = item_data.item["책"]
         self.item2_2 = item_data.item["벽돌"]
         self.item2_3 = item_data.item["롤 경기장 티켓"]
         self.item2_4 = item_data.item["ph 종이"]
         self.item2_5 = item_data.item["배터리"]
 
-
         self.item3_1 = item_data.item["커터칼"]
         self.item3_2 = item_data.item["쪽지"]
         self.item3_3 = item_data.item["밧줄"]
 
-
         self.item4_1 = item_data.item["비상용 망치"]
         self.item4_2 = item_data.item["조교 리스트"]
         self.item4_3 = item_data.item["블랙박스"]
-
 
         self.item5_1 = item_data.item["커플사진"]
         self.item5_2 = item_data.item["일기"]
@@ -44,10 +33,7 @@ class Find_Proviso(Entity):
 
         # self.item2_5 = item_data.item["책"]
 
-
-
-        Proviso.player_data = player_data # Mybutton의 클래스 변수로 mapchapter에서 넘겨받은 player의 data를 넘겨준다.
-
+        Proviso.player_data = player_data  # Mybutton의 클래스 변수로 mapchapter에서 넘겨받은 player의 data를 넘겨준다.
 
         # 여기서 단서를 만들기 위해서 단서의 클래스 타입을 무멋으로 지정할 것이느냐도 중요한데 우선은
         # button 타입으로 하겠다. 왜냐하면 다른 객체에는 on_click이나 뭐 click이벤트를 감지할만한
@@ -67,48 +53,41 @@ class Find_Proviso(Entity):
 
         # if player
 
-
         # 1. 단서를 클릭했을 떄 inventory에 추가됨은 물론이고 현장에서 증거가 습득되면서 없어지게 만들기
         # -> 이렇게 만들면 어차피 중복 클릭했을 때 inventory에 증거있는지 검사하고 잇으면 안넣게끔 구ㅇ현하는 예외처리를 안해도됨.
         # 2. 단서를 수집하러 다시 방에 들어왔을 떄 내가 가지고 있는 단서는 단서 수집 장소에 없어야한다
 
-        def compare_inventory(proviso_list): # 현재 유저의 인벤토리와 증거끼리 비교해서 인벤토리에 있는 증거라면 단서 수집 화면에서 disable처리함.
+        def compare_inventory(proviso_list):  # 현재 유저의 인벤토리와 증거끼리 비교해서 인벤토리에 있는 증거라면 단서 수집 화면에서 disable처리함.
             for i in proviso_list:
                 for j in player_data.inventory:
                     if (i.name == j.name):
                         i.disable()
 
-
-
-
         # proviso = 1의 속성은 각 용의자에 해당하는 단서의 아이디값으로 조합시에 이용하면 됨.
-        if player_data.chapter == 1:
+        if number == 1:
             background = Entity(parent=self, model='quad', texture='restroom', color=color.white,
                                 scale=(camera.aspect_ratio, 1))
 
             # 활용 부탁드립니다
 
-
             proviso1_1 = Proviso(parent=self, model='quad', texture=self.item1_1.texture, color=color.white, scale=.2,
-                                  x=.3, y=.3, name=self.item1_1.name, proviso=self.item1_1.chapter_no, desc = self.item1_1.desc)
+                                 x=.3, y=.3, name=self.item1_1.name, proviso=self.item1_1.chapter_no,
+                                 desc=self.item1_1.desc)
 
             proviso1_2 = Proviso(parent=self, model='quad', texture=self.item1_2.texture, color=color.white, scale=.2,
-                                  x=.2,
-                                  y=.3, name=self.item1_2.name, proviso=self.item1_2.chapter_no, desc = self.item1_2.desc)
+                                 x=.2,
+                                 y=.3, name=self.item1_2.name, proviso=self.item1_2.chapter_no, desc=self.item1_2.desc)
 
             proviso1_3 = Proviso(parent=self, model='quad', texture=self.item1_3.texture, color=color.white, scale=.2,
-                                  x=.0,
-                                  y=.3, name=self.item1_3.name, proviso=self.item1_3.chapter_no,  desc = self.item1_3.desc)
+                                 x=.0,
+                                 y=.3, name=self.item1_3.name, proviso=self.item1_3.chapter_no, desc=self.item1_3.desc)
 
             proviso1_4 = Proviso(parent=self, model='quad', texture=self.item1_4.texture, color=color.white, scale=.2,
-                                  x=-.1,
-                                  y=.3, name=self.item1_4.name, proviso=self.item1_4.chapter_no,  desc = self.item1_4.desc)
+                                 x=-.1,
+                                 y=.3, name=self.item1_4.name, proviso=self.item1_4.chapter_no, desc=self.item1_4.desc)
 
-
-            proviso_list1 = [proviso1_1,proviso1_2,proviso1_3,proviso1_4]
+            proviso_list1 = [proviso1_1, proviso1_2, proviso1_3, proviso1_4]
             compare_inventory(proviso_list1)
-
-
 
             #
             # for i in player_data.inventory:
@@ -122,13 +101,11 @@ class Find_Proviso(Entity):
 
 
 
-        elif player_data.chapter == 2:
+        elif number == 2:
             print("chater2 실행")
-
 
             background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
                                 scale=(camera.aspect_ratio, 1))
-
 
             proviso2_1 = Proviso(parent=self, model='quad', texture=self.item2_1.texture, color=color.white, scale=.2,
                                  x=-.2,
@@ -150,11 +127,10 @@ class Find_Proviso(Entity):
                                  x=-.2,
                                  y=-.2, name=self.item2_5.name, proviso=self.item2_5.chapter_no, desc=self.item2_5.desc)
 
-            proviso_list2 = [proviso2_1,proviso2_2,proviso2_3,proviso2_4, proviso2_5]
+            proviso_list2 = [proviso2_1, proviso2_2, proviso2_3, proviso2_4, proviso2_5]
             compare_inventory(proviso_list2)
 
-        elif player_data.chapter == 3:
-
+        elif number == 3:
 
             background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
                                 scale=(camera.aspect_ratio, 1))
@@ -171,14 +147,12 @@ class Find_Proviso(Entity):
                                  x=-.2,
                                  y=-.2, name=self.item3_3.name, proviso=self.item3_3.chapter_no, desc=self.item3_3.desc)
 
-
-            proviso_list2 = [proviso3_1,proviso3_2,proviso3_3]
+            proviso_list2 = [proviso3_1, proviso3_2, proviso3_3]
             compare_inventory(proviso_list2)
 
 
 
-        elif player_data.chapter == 4:
-
+        elif number == 4:
 
             background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
                                 scale=(camera.aspect_ratio, 1))
@@ -199,7 +173,7 @@ class Find_Proviso(Entity):
             compare_inventory(proviso_list2)
 
 
-        elif player_data.chapter == 5:
+        elif number == 5:
             background = Entity(parent=self, model='quad', texture='inha_ware6_hall', colr=color.white,
                                 scale=(camera.aspect_ratio, 1))
 
@@ -219,27 +193,21 @@ class Find_Proviso(Entity):
                                  x=-.2,
                                  y=-.2, name=self.item5_4.name, proviso=self.item5_4.chapter_no, desc=self.item5_4.desc)
 
-            proviso_list2 = [proviso5_1, proviso5_2, proviso5_3,proviso5_4]
+            proviso_list2 = [proviso5_1, proviso5_2, proviso5_3, proviso5_4]
             compare_inventory(proviso_list2)
 
     # 여기서 내가 만든 Proviso 클래스에서 매개변수로 **kwargs로 매개변수들을 받는다. 애초에 Entity랑 MyButton에서부터 가변 키워드 인자를 받아오고 있기 때문에
-        # 저렇게 넘겨주고 다시 Proviso 에서 키워드 인자를 넘겨주면 초기화가 된다.
+    # 저렇게 넘겨주고 다시 Proviso 에서 키워드 인자를 넘겨주면 초기화가 된다.
 
-        # list = [proviso1,proviso2,proviso3,proviso4,proviso5]
-        #
-        # test = Draggable(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.2, y=-.2,
-        #                  text='text5.')
+    # list = [proviso1,proviso2,proviso3,proviso4,proviso5]
+    #
+    # test = Draggable(parent=self, model='quad', texture='glass.png', color=color.white, scale=.2, x=-.2, y=-.2,
+    #                  text='text5.')
 
-        # on_click을 사용하기 위해서는 button 클래스여야한다. 따라서 클릭해야 할 객체들은 모두 button으로 만들자.
-        # 이 때 hover시 버튼 객체의 특성상 칼라가 달라지는 문제가 발생하므로 이건 나중에 button 클래스에 속성 찾아봐야할듯.
-        # on_click 메서드를 단서별로 다 만들기는 너무 비효율적이니까 하나의 on_click 함수로 만들어놓고 함수 내부에서 어떤 버튼 객체인지 검사하게끔 만들어야 한다.
-        # 이벤트 리스너를 결국에 한개씩 다달아줘야할 거 같긴한데 일단 생각나는대로 되는 방법으로 구현하고 나중에 바꿔보자.
-
-
-
-
-
-
+    # on_click을 사용하기 위해서는 button 클래스여야한다. 따라서 클릭해야 할 객체들은 모두 button으로 만들자.
+    # 이 때 hover시 버튼 객체의 특성상 칼라가 달라지는 문제가 발생하므로 이건 나중에 button 클래스에 속성 찾아봐야할듯.
+    # on_click 메서드를 단서별로 다 만들기는 너무 비효율적이니까 하나의 on_click 함수로 만들어놓고 함수 내부에서 어떤 버튼 객체인지 검사하게끔 만들어야 한다.
+    # 이벤트 리스너를 결국에 한개씩 다달아줘야할 거 같긴한데 일단 생각나는대로 되는 방법으로 구현하고 나중에 바꿔보자.
 
     def input(self, key):
         if key == 'x':

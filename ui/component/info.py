@@ -14,7 +14,7 @@ from ursina import *
 
 
 class Info(Entity):
-    def __init__(self, chapter):
+    def __init__(self):
         super().__init__(parent=camera.ui)
 
         gradient_v = Entity(model='quad', texture='vertical_gradient', parent=self,
