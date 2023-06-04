@@ -4,7 +4,7 @@ from ui.scene.renscene import RenScene
 from object.char.npc import Npc
 from object.char.player import Player
 from object.portal import Portal
-from object.proviso import Proviso
+from object.find_proviso import Find_Proviso
 
 
 class MapChapter(Entity):
@@ -115,4 +115,4 @@ class MapChapter(Entity):
         if self.proviso.intersects(self.player) and key == 'e':
 
             self.pro_passed = True
-            Proviso(self.player_data, self.item_data)
+            Find_Proviso(self.player_data, self.item_data)

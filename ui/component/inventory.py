@@ -1,6 +1,6 @@
 from ursina import *
 
-from prec.my_test.mybutton import MyButton
+from prec.my_test.proviso import Proviso
 
 
 class Inventory(Entity):
@@ -20,6 +20,7 @@ class Inventory(Entity):
 
         for item in player_data.inventory: # Mybutton 객체가 들어있는 inventory list
             self.append(item)
+            print(item.text)
 
 
         for key, value in kwargs.items():
@@ -62,7 +63,8 @@ class Inventory(Entity):
 
 
 
-        icon.tooltip = Tooltip(item.text)
+        icon.tooltip = Tooltip(item.name)
+        icon.tooltip.font = "NanumSquareRoundB.ttf"
         icon.tooltip.background.color = color.color(0, 0, 0, .8)
 
         def drag():
